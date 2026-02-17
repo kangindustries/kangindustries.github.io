@@ -206,6 +206,35 @@
     title.innerHTML = '';
     title.appendChild(newContent);
 
+    // Remove formatting whitespace introduced by HTML indentation
+    const trimEdgeSpaces = () => {
+      const chars = title.querySelectorAll('.char');
+      if (!chars.length) return;
+
+      const isWhitespaceChar = (value) => {
+        if (value == null) return false;
+        const normalized = value.replace(/\u00a0/g, ' ');
+        return normalized.trim() === '';
+      };
+
+      let first = chars[0];
+      while (first && isWhitespaceChar(first.textContent)) {
+        const parent = first.parentNode;
+        first.remove();
+        first = parent?.querySelector('.char') || null;
+      }
+
+      let currentChars = title.querySelectorAll('.char');
+      let last = currentChars[currentChars.length - 1];
+      while (last && isWhitespaceChar(last.textContent)) {
+        const parent = last.parentNode;
+        last.remove();
+        currentChars = title.querySelectorAll('.char');
+        last = currentChars[currentChars.length - 1];
+      }
+    };
+    trimEdgeSpaces();
+
     // Assign staggered delays
     title.querySelectorAll('.char').forEach((span, i) => {
       span.style.animationDelay = `${0.5 + i * 0.04}s`;
