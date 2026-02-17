@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kang Industries</title>
+  <meta name="description" content="Cybersecurity portfolio — Yap Kang, Year 2 student at Temasek Polytechnic." />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+
+  <!-- Boot screen -->
+  <div id="boot-screen">
+    <div class="boot-lines"></div>
+    <div class="boot-bar-wrap">
+      <div class="boot-bar"></div>
+    </div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./index.html" aria-label="Home">
+        <img src="assets/images/kang_industries.png" alt="Kang Industries" class="brand__img">
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="./projects.html"><span>Projects</span></a>
+        <a class="nav__link" href="./blog.html"><span>Blog</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ── HERO ── -->
+    <section class="poster">
+      <div class="poster__grid"></div>
+      <div class="poster__glow"></div>
+      <div class="scanner-line"></div>
+      <div id="radar-container"></div>
+      <canvas id="hero-particles"></canvas>
+
+      <!-- Corner brackets -->
+      <div class="poster__corner poster__corner--tl"></div>
+      <div class="poster__corner poster__corner--tr"></div>
+      <div class="poster__corner poster__corner--bl"></div>
+      <div class="poster__corner poster__corner--br"></div>
+
+      <div id="status-display" class="status-text">SYSTEM_IDLE</div>
+
+      <div class="container poster__inner">
+        <h1 class="title">
+          Hello, I'm <span id="decipher-name" class="title__accent" data-value="Yap Kang">Yap Kang</span>
+        </h1>
+        <p class="lead">
+          Welcome to my portfolio! I'm a Year 2 Cybersecurity student at Temasek Polytechnic.
+          Here you can find my past projects, blogs and ways you can reach out to me. Have a look!
+        </p>
+        <div class="actions">
+          <a class="btn" href="./projects.html">View My Projects</a>
+          <a class="btn btn--secondary" href="#about">Learn More About Me</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-header-flex">
+          <div class="about-text-content">
+            <div class="section__head">
+              <h2>About Me</h2>
+            </div>
+            <p class="lead lead--sm">
+              I have a strong interest in learning how we can better protect our digital systems and conduct
+              forensic investigations to fight and prevent cybercrime.
+            </p>
+          </div>
+          <div class="about-circular-container">
+            <img src="assets/images/elementor-placeholder-image.png" alt="Yap Kang" class="about-circular-img">
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="panel">
+            <h2 class="h3">Modules Completed:</h2>
+            <ul class="list">
+              <li><strong>Ethical Hacking &amp; Intrusion Prevention</strong> — Vulnerability assessments using
+                Metasploit, mapped to MITRE ATT&amp;CK.</li>
+              <li><strong>Forensics in Digital Security</strong> — NTFS, EXT4 and Apple filesystems; file recovery
+                techniques.</li>
+              <li><strong>Server Administration &amp; Security</strong> — Linux server hardening, service configuration
+                and security.</li>
+              <li><strong>Enterprise Networking</strong> — RIP/OSPF routing, DNS, FTP and SSH configuration.</li>
+              <li><strong>Secure Web Applications</strong> — Encryption, authentication, input validation in web
+                systems.</li>
+              <li><strong>Incident Response &amp; Management</strong> — Wireshark traffic analysis, SIEM configuration
+                and threat detection.</li>
+              <li><strong>Network Security</strong> — Firewall and VPN service configuration across network topologies.
+              </li>
+              <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against CIS benchmarks and
+                compliance frameworks.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h2 class="h3">Tools &amp; Technologies:</h2>
+            <ul class="list tools-list">
+              <li><strong>Security Monitoring & Detection</strong> — Wazuh, Wireshark, Snort IDS</li>
+              <li><strong>Forensics</strong> — Autopsy, FTK, ExifTool</li>
+              <li><strong>Penetration Testing</strong> — Kali Linux, Metasploit Framework, OWASP ZAP, Burp Suite</li>
+              <li><strong>Networking</strong> — Cisco Packet Tracer</li>
+              <li><strong>Programming & Development</strong> — Python, HTML, CSS, SQL</li>
+              <li><strong>General Applications</strong> — Word, PowerPoint, Docs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CERTIFICATIONS ── -->
+    <section class="section" id="certifications">
+      <div class="container">
+        <div class="section__head">
+          <h2>Certifications</h2>
+        </div>
+        <div class="cert-grid">
+          <!-- Example certification card -->
+          <div class="cert-card">
+            <img src="assets/images/elementor-placeholder-image.png" alt="Certification Logo" class="cert-img">
+            <div class="cert-details">
+              <h3>CompTIA Security+</h3>
+              <p>Issued: Jan 2026 · Credential ID: ABC12345</p>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <img src="assets/images/elementor-placeholder-image.png" alt="Certification Logo" class="cert-img">
+            <div class="cert-details">
+              <h3>Certified Ethical Hacker (CEH)</h3>
+              <p>Issued: Dec 2025 · Credential ID: XYZ67890</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── CONTACT ── -->
+    <section class="section" id="contact">
+      <div class="container split">
+        <div>
+          <div class="section__head">
+            <h2>Get in Touch</h2>
+          </div>
+          <p class="lead lead--sm">
+            Feel free to reach out. I'm open to collaborations and discussions,
+            especially if you're working on similar projects.<br><br>
+            This website is in development — feedback is welcome.
+          </p>
+          <div class="stack">
+            <a class="stackbtn" href="https://www.linkedin.com/" target="_blank"
+              rel="noopener noreferrer"><span>LinkedIn — Connect with me</span></a>
+            <a class="stackbtn" href="mailto:you@example.com"><span>Email — Reach out directly</span></a>
+            <a class="stackbtn" href="./assets/Kang-Resume.pdf"><span>Resume — Download as PDF</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>KANG_INDUSTRIES · Last updated: 15 Jan 2026</p>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
