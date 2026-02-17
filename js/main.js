@@ -7,14 +7,14 @@
      fades out to reveal the page
   ═══════════════════════════════════════════════ */
   const bootLines = [
-    '> KANG_INDUSTRIES OS v2.6.1',
+    '> KANG_INDUSTRIES OS v3.0.0',
     '> Initializing security modules...',
     '> Loading cryptographic keys... [OK]',
     '> Mounting forensics toolkit... [OK]',
     '> Connecting to threat intel feed... [OK]',
     '> Calibrating SIEM detection rules... [OK]',
     '> All systems operational.',
-    '> WELCOME, OPERATOR.',
+    '> WELCOME.',
   ];
 
   function runBoot() {

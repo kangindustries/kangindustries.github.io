@@ -388,7 +388,7 @@ body::after {
 .status-text {
   position: absolute; bottom: 24px; right: 32px;
   font-family: var(--mono);
-  font-size: 30px;
+  font-size: 25px;
   color: var(--green);
   letter-spacing: 0.18em;
   opacity: 0;
