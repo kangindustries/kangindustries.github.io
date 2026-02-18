@@ -28,7 +28,7 @@
     }
 
     const linesEl = boot.querySelector('.boot-lines');
-    const barEl   = boot.querySelector('.boot-bar');
+    const barEl = boot.querySelector('.boot-bar');
 
     bootLines.forEach((text, i) => {
       const div = document.createElement('div');
@@ -57,7 +57,7 @@
      Ring follows with elastic lag.
      Morphs on hover & click.
   ═══════════════════════════════════════════════ */
-  const dot  = document.getElementById('cursor-dot');
+  const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
 
   if (dot && ring && window.matchMedia('(pointer: fine)').matches) {
@@ -68,7 +68,7 @@
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
       dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
+      dot.style.top = my + 'px';
     });
 
     // Ring lerps toward cursor
@@ -76,7 +76,7 @@
       rx += (mx - rx) * 0.14;
       ry += (my - ry) * 0.14;
       ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
+      ring.style.top = ry + 'px';
       raf = requestAnimationFrame(tickRing);
     }
     tickRing();
@@ -92,7 +92,7 @@
 
     // Shrink on click
     document.addEventListener('mousedown', () => ring.classList.add('clicking'));
-    document.addEventListener('mouseup',   () => ring.classList.remove('clicking'));
+    document.addEventListener('mouseup', () => ring.classList.remove('clicking'));
 
     // Hide when leaving window
     document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
@@ -247,8 +247,8 @@
   function decipherName() {
     const el = document.getElementById('decipher-name');
     if (!el) return;
-    const target  = el.dataset.value;
-    const chars   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?';
+    const target = el.dataset.value;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?';
     let iteration = 0;
 
     el.textContent = '';
@@ -282,13 +282,13 @@
      RADAR BLIPS + STATUS DECODE
   ═══════════════════════════════════════════════ */
   const radarContainer = document.getElementById('radar-container');
-  const statusEl       = document.getElementById('status-display');
+  const statusEl = document.getElementById('status-display');
 
   if (radarContainer && statusEl) {
     const phrases = [
       'INCIDENT_RESPONSE', 'NETWORK_SECURITY', 'IT_AUDITING',
       'DIGITAL_FORENSICS', 'MALWARE_ANALYSIS', 'ETHICAL_HACKING',
-      'SERVER_ADMINISTRATION',   'INTRUSION_PREVENTION',  'SECURE_WEB_APPLICATIONS'
+      'SERVER_ADMINISTRATION', 'INTRUSION_PREVENTION', 'SECURE_WEB_APPLICATIONS'
     ];
 
     function decode(text) {
@@ -299,7 +299,7 @@
           idx < i ? text[idx] : alphabet[Math.floor(Math.random() * alphabet.length)]
         ).join('');
         if (i >= text.length) clearInterval(iv);
-        i += 1/3;
+        i += 1 / 3;
       }, 28);
     }
 
@@ -307,7 +307,7 @@
       const b = document.createElement('div');
       b.className = 'radar-blip';
       b.style.left = (Math.random() * 32 + 58) + '%';
-      b.style.top  = (Math.random() * 76 + 10) + '%';
+      b.style.top = (Math.random() * 76 + 10) + '%';
       radarContainer.appendChild(b);
       setTimeout(() => b.remove(), 3500);
       decode(phrases[Math.floor(Math.random() * phrases.length)]);
@@ -327,7 +327,7 @@
     const ctx = canvas.getContext('2d');
 
     function resize() {
-      canvas.width  = canvas.offsetWidth;
+      canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     }
     resize();
@@ -340,7 +340,7 @@
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       speed: 0.3 + Math.random() * 0.7,
-      char:  CHARS[Math.floor(Math.random() * CHARS.length)],
+      char: CHARS[Math.floor(Math.random() * CHARS.length)],
       opacity: 0.05 + Math.random() * 0.18,
       size: 10 + Math.random() * 6,
       changeTimer: 0,
@@ -360,8 +360,8 @@
           p.x = Math.random() * canvas.width;
         }
         ctx.globalAlpha = p.opacity;
-        ctx.fillStyle   = '#34d399';
-        ctx.font        = `${p.size}px 'DM Mono', monospace`;
+        ctx.fillStyle = '#34d399';
+        ctx.font = `${p.size}px 'DM Mono', monospace`;
         ctx.fillText(p.char, p.x, p.y);
       });
       requestAnimationFrame(tick);
@@ -376,15 +376,15 @@
   function initCardTilt() {
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('mousemove', e => {
-        const r  = card.getBoundingClientRect();
-        const cx = r.left + r.width  / 2;
-        const cy = r.top  + r.height / 2;
-        const dx = (e.clientX - cx) / (r.width  / 2);  // -1 … +1
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = (e.clientX - cx) / (r.width / 2);  // -1 … +1
         const dy = (e.clientY - cy) / (r.height / 2);  // -1 … +1
 
         // Update the radial highlight position
-        card.style.setProperty('--cx', ((e.clientX - r.left) / r.width  * 100) + '%');
-        card.style.setProperty('--cy', ((e.clientY - r.top)  / r.height * 100) + '%');
+        card.style.setProperty('--cx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--cy', ((e.clientY - r.top) / r.height * 100) + '%');
 
         // 3D tilt — max 6 degrees
         card.style.transform =
@@ -444,6 +444,50 @@
     initParticles();
     initCardTilt();
     initScrollObserver();
+    initCertLightbox();
   });
+
+  /* ═══════════════════════════════════════════════
+   CERT LIGHTBOX
+   Click a cert card to zoom its image
+═══════════════════════════════════════════════ */
+  function initCertLightbox() {
+    const lightbox = document.getElementById('cert-lightbox');
+    const lbImg = document.getElementById('cert-lightbox-img');
+    const closeBtn = document.getElementById('cert-lightbox-close');
+    if (!lightbox || !lbImg) return;
+
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || 'Certificate';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.cert-card').forEach(card => {
+      card.style.cursor = 'none';
+      card.addEventListener('click', () => {
+        const img = card.querySelector('.cert-img');
+        if (img) openLightbox(img.src, img.alt);
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeLightbox);
+
+    // Click backdrop to close
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Escape key to close
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
 
 })();
