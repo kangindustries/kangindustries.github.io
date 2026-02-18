@@ -1,0 +1,383 @@
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Navbar from '../components/Navbar.jsx'
+import Footer from '../components/Footer.jsx'
+import BootScreen from '../components/BootScreen.jsx'
+import CertLightbox from '../components/CertLightbox.jsx'
+import ScrollProgress from '../components/ScrollProgress.jsx'
+import AudioVisualizer from '../components/AudioVisualizer.jsx'
+import { useScrollObserver } from '../hooks/useScrollObserver.js'
+import { useCardTilt } from '../hooks/useCardTilt.js'
+import knimeCert  from '../assets/knimecert.png'
+import udemyCert  from '../assets/udemycert.png'
+
+/* ── Typewriter with human timing ── */
+function useTypewriter(phrases) {
+  const [displayed, setDisplayed] = useState('')
+  const [phraseIdx, setPhraseIdx] = useState(0)
+  const [charIdx,   setCharIdx]   = useState(0)
+  const [deleting,  setDeleting]  = useState(false)
+  const [paused,    setPaused]    = useState(false)
+
+  useEffect(() => {
+    if (paused) return
+    const target = phrases[phraseIdx]
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        if (charIdx < target.length) {
+          setDisplayed(target.slice(0, charIdx + 1))
+          setCharIdx(c => c + 1)
+        } else {
+          setPaused(true)
+          setTimeout(() => { setDeleting(true); setPaused(false) }, 2200)
+        }
+      } else {
+        if (charIdx > 0) {
+          setDisplayed(target.slice(0, charIdx - 1))
+          setCharIdx(c => c - 1)
+        } else {
+          setDeleting(false)
+          setPhraseIdx(i => (i + 1) % phrases.length)
+        }
+      }
+    }, deleting ? 40 + Math.random() * 30 : 65 + Math.random() * 65)
+    return () => clearTimeout(timeout)
+  }, [charIdx, deleting, paused, phraseIdx, phrases])
+
+  return displayed
+}
+
+/* ── Char-by-char title ── */
+function SplitTitle({ children }) {
+  const titleRef = useRef(null)
+  useEffect(() => {
+    const title = titleRef.current
+    if (!title) return
+    function processNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment()
+        ;[...node.textContent].forEach(ch => {
+          const span = document.createElement('span')
+          span.className = 'char'
+          span.textContent = ch === ' ' ? '\u00a0' : ch
+          frag.appendChild(span)
+        })
+        return frag
+      }
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const clone = node.cloneNode(false)
+        node.childNodes.forEach(child => clone.appendChild(processNode(child)))
+        return clone
+      }
+      return node.cloneNode(true)
+    }
+    const frag = document.createDocumentFragment()
+    title.childNodes.forEach(child => frag.appendChild(processNode(child)))
+    title.innerHTML = ''
+    title.appendChild(frag)
+    const isWS = v => !v || v.replace(/\u00a0/g, ' ').trim() === ''
+    let chars = title.querySelectorAll('.char')
+    while (chars[0] && isWS(chars[0].textContent)) { chars[0].remove(); chars = title.querySelectorAll('.char') }
+    chars = title.querySelectorAll('.char')
+    while (chars[chars.length-1] && isWS(chars[chars.length-1].textContent)) {
+      chars[chars.length-1].remove(); chars = title.querySelectorAll('.char')
+    }
+    title.querySelectorAll('.char').forEach((s, i) => { s.style.animationDelay = `${0.5 + i * 0.04}s` })
+  }, [])
+  return <h1 className="title" ref={titleRef}>{children}</h1>
+}
+
+/* ── Particle canvas ── */
+function HeroParticles() {
+  const canvasRef = useRef(null)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    const COUNT = 60
+    const CHARS = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ'
+    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight }
+    resize()
+    window.addEventListener('resize', resize, { passive: true })
+    const particles = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      speed: 0.25 + Math.random() * 0.65,
+      char: CHARS[Math.floor(Math.random() * CHARS.length)],
+      opacity: 0.04 + Math.random() * 0.16,
+      size: 10 + Math.random() * 7, changeTimer: 0,
+      isColumn: Math.random() > 0.7,
+    }))
+    let rafId
+    const tick = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      particles.forEach(p => {
+        p.y += p.speed; p.changeTimer++
+        if (p.changeTimer > 35) { p.char = CHARS[Math.floor(Math.random() * CHARS.length)]; p.changeTimer = 0 }
+        if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * canvas.width }
+        ctx.globalAlpha = p.opacity
+        ctx.fillStyle = '#34d399'
+        ctx.font = `${p.size}px 'DM Mono', monospace`
+        ctx.fillText(p.char, p.x, p.y)
+        if (p.isColumn) {
+          ctx.globalAlpha = p.opacity * 0.25
+          ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], p.x, p.y - p.size)
+        }
+      })
+      rafId = requestAnimationFrame(tick)
+    }
+    tick()
+    return () => { cancelAnimationFrame(rafId); window.removeEventListener('resize', resize) }
+  }, [])
+  return <canvas ref={canvasRef} style={{ position:'absolute',inset:0,width:'100%',height:'100%',zIndex:2,pointerEvents:'none' }}></canvas>
+}
+
+/* ── Radar + status ── */
+function RadarBlips() {
+  const containerRef = useRef(null)
+  const statusRef    = useRef(null)
+  const coordRef     = useRef(null)
+  useEffect(() => {
+    const container = containerRef.current
+    const statusEl  = statusRef.current
+    const coordEl   = coordRef.current
+    if (!container || !statusEl) return
+    const phrases = [
+      'INCIDENT_RESPONSE','NETWORK_SECURITY','IT_AUDITING','DIGITAL_FORENSICS',
+      'MALWARE_ANALYSIS','ETHICAL_HACKING','SERVER_ADMINISTRATION',
+      'INTRUSION_PREVENTION','SECURE_WEB_APPLICATIONS','THREAT_INTELLIGENCE'
+    ]
+    const decode = (text) => {
+      const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
+      let i = 0
+      const iv = setInterval(() => {
+        statusEl.textContent = text.split('').map((ch, idx) =>
+          idx < i ? text[idx] : alpha[Math.floor(Math.random() * alpha.length)]
+        ).join('')
+        if (i >= text.length) clearInterval(iv)
+        i += 1/3
+      }, 28)
+    }
+    const spawnBlip = () => {
+      const b = document.createElement('div')
+      b.className = 'radar-blip'
+      const lx = Math.random() * 32 + 58
+      const ty = Math.random() * 60 + 10
+      b.style.left = lx + '%'; b.style.top = ty + '%'
+      container.appendChild(b)
+      setTimeout(() => b.remove(), 3500)
+      decode(phrases[Math.floor(Math.random() * phrases.length)])
+      if (coordEl) coordEl.textContent = `LAT: ${(ty * 0.9 - 45).toFixed(4)}° LON: ${(lx * 3.6 - 180).toFixed(4)}°`
+    }
+    const t = setTimeout(() => { spawnBlip(); const iv = setInterval(spawnBlip, 4000); return () => clearInterval(iv) }, 3400)
+    return () => clearTimeout(t)
+  }, [])
+  return (
+    <>
+      <div id="radar-container" ref={containerRef}></div>
+      <div id="status-display" className="status-text" ref={statusRef}>SYSTEM_IDLE</div>
+      <div className="coord-display" ref={coordRef}>LAT: ---.---- LON: ---.----</div>
+    </>
+  )
+}
+
+/* ── Cert card ── */
+function CertCard({ src, alt, title, meta, onOpen }) {
+  return (
+    <div className="cert-card" onClick={() => onOpen(src, alt)}>
+      <img src={src} alt={alt} className="cert-img" />
+      <div className="cert-details"><h3>{title}</h3><p>{meta}</p></div>
+    </div>
+  )
+}
+
+const TYPEWRITER_PHRASES = [
+  'Cybersecurity Student',
+  'Ethical Hacker',
+  'Digital Forensics Analyst',
+  'Security Researcher',
+  'Incident Responder',
+]
+
+export default function Home() {
+  const nameRef   = useRef(null)
+  const posterRef = useRef(null)
+  const layer1Ref = useRef(null)
+  const layer2Ref = useRef(null)
+  const [lightbox, setLightbox] = useState(null)
+  const typeText = useTypewriter(TYPEWRITER_PHRASES)
+
+  useScrollObserver()
+  useCardTilt()
+
+  // Decipher name
+  useEffect(() => {
+    const el = nameRef.current
+    if (!el) return
+    const target = 'Yap Kang'
+    const chars  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?'
+    let iteration = 0
+    el.textContent = target
+    const t = setTimeout(() => {
+      el.textContent = ''
+      const iv = setInterval(() => {
+        el.textContent = target.split('').map((ch, idx) => {
+          if (idx < iteration) return target[idx]
+          return chars[Math.floor(Math.random() * chars.length)]
+        }).join('')
+        if (iteration >= target.length) clearInterval(iv)
+        iteration += 1/4
+      }, 40)
+    }, 2800)
+    return () => clearTimeout(t)
+  }, [])
+
+  // Parallax
+  useEffect(() => {
+    const poster = posterRef.current
+    const l1 = layer1Ref.current
+    const l2 = layer2Ref.current
+    if (!poster) return
+    const onMove = (e) => {
+      const r = poster.getBoundingClientRect()
+      poster.style.setProperty('--mx', (e.clientX - r.left) + 'px')
+      poster.style.setProperty('--my', (e.clientY - r.top) + 'px')
+      const cx = (e.clientX - r.left) / r.width  - 0.5
+      const cy = (e.clientY - r.top)  / r.height - 0.5
+      if (l1) l1.style.transform = `translate(${cx * -16}px, ${cy * -10}px)`
+      if (l2) l2.style.transform = `translate(${cx * -30}px, ${cy * -20}px)`
+    }
+    poster.addEventListener('mousemove', onMove)
+    return () => poster.removeEventListener('mousemove', onMove)
+  }, [])
+
+  return (
+    <>
+      <ScrollProgress />
+      <BootScreen />
+      <a className="skip" href="#main">Skip to content</a>
+      <Navbar />
+
+      <main id="main" className="page-enter">
+
+        {/* ── HERO ── */}
+        <section className="poster" ref={posterRef}>
+          <div className="poster__grid"></div>
+          <div className="poster__glow"></div>
+          <div className="poster__layer" ref={layer1Ref}><div className="poster__orb poster__orb--1"></div></div>
+          <div className="poster__layer" ref={layer2Ref}><div className="poster__orb poster__orb--2"></div></div>
+          <HeroParticles />
+          <RadarBlips />
+          <AudioVisualizer />
+          <div className="poster__corner poster__corner--tl"></div>
+          <div className="poster__corner poster__corner--tr"></div>
+          <div className="poster__corner poster__corner--bl"></div>
+          <div className="poster__corner poster__corner--br"></div>
+
+          <div className="container poster__inner">
+            <SplitTitle>
+              Hello, I'm{' '}
+              <span ref={nameRef} className="title__accent">Yap Kang</span>
+            </SplitTitle>
+
+            <p className="lead" style={{ marginBottom: '0.25rem' }}>
+              <span style={{ color:'var(--green)', fontFamily:'var(--mono)', fontSize:'clamp(13px,1.3vw,16px)', letterSpacing:'0.06em' }}>
+                {typeText}<span className="typewriter-cursor"></span>
+              </span>
+            </p>
+
+            <p className="lead" style={{ animationDelay:'1.3s', marginTop:'1.25rem' }}>
+              Welcome to my portfolio! I'm a Year 2 Cybersecurity student at Temasek Polytechnic.
+              Here you can find my past projects, blogs and ways you can reach out to me. Have a look!
+            </p>
+
+            <div className="actions">
+              <Link className="btn" to="/projects">View My Projects</Link>
+              <a className="btn btn--secondary" href="#about">Learn More About Me</a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── ABOUT ── */}
+        <section className="section" id="about">
+          <div className="container">
+            <div className="about-header-flex">
+              <div className="about-text-content">
+                <div className="section__head">
+                  {/* Plain heading with glow underline — no glitch pseudo-elements */}
+                  <h2 className="section-heading-glow">About Me</h2>
+                </div>
+                <p className="lead lead--sm">
+                  I have a strong interest in learning how we can better protect our digital systems and conduct
+                  forensic investigations to fight and prevent cybercrime.
+                </p>
+              </div>
+            </div>
+            <div className="about-grid">
+              <div className="panel">
+                <h2 className="h3">Modules Completed:</h2>
+                <ul className="list">
+                  <li><strong>Ethical Hacking &amp; Intrusion Prevention</strong> — Vulnerability assessments using Metasploit, mapped to MITRE ATT&amp;CK.</li>
+                  <li><strong>Forensics in Digital Security</strong> — NTFS, EXT4 and Apple filesystems; file recovery techniques.</li>
+                  <li><strong>Server Administration &amp; Security</strong> — Linux server hardening, service configuration and security.</li>
+                  <li><strong>Enterprise Networking</strong> — RIP/OSPF routing, DNS, FTP and SSH configuration.</li>
+                  <li><strong>Secure Web Applications</strong> — Encryption, authentication, input validation in web systems.</li>
+                  <li><strong>Incident Response &amp; Management</strong> — Wireshark traffic analysis, SIEM configuration and threat detection.</li>
+                  <li><strong>Network Security</strong> — Firewall and VPN service configuration across network topologies.</li>
+                  <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against CIS benchmarks and compliance frameworks.</li>
+                </ul>
+              </div>
+              <div className="panel">
+                <h2 className="h3">Tools &amp; Technologies:</h2>
+                <ul className="list">
+                  <li><strong>Security Monitoring &amp; Detection</strong> — Wazuh, Wireshark, Snort IDS, Windows Defender Firewall</li>
+                  <li><strong>Forensics</strong> — Autopsy, FTK, ExifTool</li>
+                  <li><strong>Penetration Testing</strong> — Kali Linux, Metasploit Framework, OWASP ZAP, Burp</li>
+                  <li><strong>Networking</strong> — Cisco Packet Tracer, GNS3</li>
+                  <li><strong>Programming &amp; Development</strong> — Python, HTML, CSS, React</li>
+                  <li><strong>General Applications</strong> — Word, PowerPoint, Visual Studio Code, GitHub</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CERTIFICATIONS ── */}
+        <section className="section" id="certifications">
+          <div className="container">
+            <div className="section__head">
+              <h2 className="section-heading-glow">Certifications</h2>
+            </div>
+            <div className="cert-grid">
+              <CertCard src={knimeCert} alt="KNIME Certification" title="Basic Proficiency in KNIME Analytics Platform" meta="Issued: Aug 2024 · by KNIME" onOpen={(s,a) => setLightbox({src:s,alt:a})} />
+              <CertCard src={udemyCert} alt="Udemy Certification" title="The Modern Python Bootcamp" meta="Issued: Nov 2025 · by Udemy" onOpen={(s,a) => setLightbox({src:s,alt:a})} />
+            </div>
+          </div>
+        </section>
+
+        {/* ── CONTACT ── */}
+        <section className="section" id="contact">
+          <div className="container split">
+            <div>
+              <div className="section__head">
+                <h2 className="section-heading-glow">Get in Touch</h2>
+              </div>
+              <p className="lead lead--sm">
+                Feel free to reach out. I'm open to collaborations and discussions,
+                especially if you're working on similar projects.<br /><br />
+                This website is in development, I recommend visiting it only on desktop. Any feedback is welcome.
+              </p>
+              <div className="stack">
+                <a className="stackbtn" href="https://www.linkedin.com/in/yap-kang-b84755304/" target="_blank" rel="noopener noreferrer"><span>LinkedIn — Connect with me</span></a>
+                <a className="stackbtn" href="mailto:yap.kang@gmail.com"><span>Email — Reach out directly</span></a>
+                <a className="stackbtn" href="https://github.com/kangindustries"><span>GitHub</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+      <Footer />
+      {lightbox && <CertLightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />}
+    </>
+  )
+}
