@@ -361,8 +361,7 @@ export default function Home() {
               </div>
               <p className="lead lead--sm">
                 Feel free to reach out. I'm open to collaborations and discussions,
-                especially if you're working on similar projects.<br /><br />
-                This website is in development, I recommend visiting it only on desktop. Any feedback is welcome.
+                especially if you're working on similar projects.
               </p>
               <div className="stack">
                 <a className="stackbtn" href="https://www.linkedin.com/in/yap-kang-b84755304/" target="_blank" rel="noopener noreferrer"><span>LinkedIn — Connect with me</span></a>
