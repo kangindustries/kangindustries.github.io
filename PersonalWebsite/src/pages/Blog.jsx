@@ -3,10 +3,8 @@ import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import ScrollProgress from '../components/ScrollProgress.jsx'
 import { useScrollObserver } from '../hooks/useScrollObserver.js'
-import { useCardTilt } from '../hooks/useCardTilt.js'
 
-/* ── Char-by-char title (same as Home) ── */
-function SplitTitle({ children, className = '' }) {
+function SplitTitle({ children }) {
   const titleRef = useRef(null)
   useEffect(() => {
     const title = titleRef.current
@@ -42,12 +40,11 @@ function SplitTitle({ children, className = '' }) {
     }
     title.querySelectorAll('.char').forEach((s, i) => { s.style.animationDelay = `${0.05 + i * 0.045}s` })
   }, [])
-  return <h1 className={`title title--sm ${className}`} ref={titleRef}>{children}</h1>
+  return <h1 className="title title--sm" ref={titleRef}>{children}</h1>
 }
 
 export default function Blog() {
   useScrollObserver()
-  useCardTilt()
 
   return (
     <>
@@ -73,19 +70,17 @@ export default function Blog() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Linux Hardening Checklist</h2>
+                  <h2 className="h3">Coming Soon...</h2>
                   <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>12 Jan 2026 · 8 min read</p>
                 </div>
                 <div className="tags">
-                  <span className="tag">Permissions</span>
-                  <span className="tag">Logging</span>
-                  <span className="tag">Audit</span>
+                  <span className="tag">Test</span>
+                  <span className="tag">Test</span>
+                  <span className="tag">Test</span>
                 </div>
               </div>
               <p className="card__body">
-                Why each CIS Benchmark setting matters and how to verify it. Covers filesystem partitioning,
-                auditd configuration, SSH hardening, and cron permissions with commands you can actually run.
-                Includes before/after validation steps and common misconfigurations to avoid.
+                Coming Soon...
               </p>
               <div className="card__actions">
                 <a className="link" href="#">Read article →</a>
@@ -96,19 +91,17 @@ export default function Blog() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Web Security Fundamentals</h2>
+                  <h2 className="h3">Coming Soon...</h2>
                   <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>8 Jan 2026 · 10 min read</p>
                 </div>
                 <div className="tags">
-                  <span className="tag">CSRF</span>
-                  <span className="tag">XSS</span>
-                  <span className="tag">Cookies</span>
+                  <span className="tag">Test</span>
+                  <span className="tag">Test</span>
+                  <span className="tag">Test</span>
                 </div>
               </div>
               <p className="card__body">
-                Mental models for common web vulnerabilities with practical examples. How to test safely in
-                controlled environments, what actually breaks in production systems, and common mistakes even
-                experienced developers make when implementing security controls.
+                Coming Soon...
               </p>
               <div className="card__actions">
                 <a className="link" href="#">Read article →</a>
@@ -119,19 +112,17 @@ export default function Blog() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Sysmon Event ID Quick Reference</h2>
+                  <h2 className="h3">Coming Soon...</h2>
                   <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>5 Jan 2026 · 6 min read</p>
                 </div>
                 <div className="tags">
-                  <span className="tag">Sysmon</span>
-                  <span className="tag">Windows</span>
-                  <span className="tag">Cheatsheet</span>
+                  <span className="tag">Test</span>
+                  <span className="tag">Test</span>
+                  <span className="tag">Test</span>
                 </div>
               </div>
               <p className="card__body">
-                Event IDs 1-23 explained with actual use cases and detection scenarios. When to prioritize
-                process creation vs network connections, plus filtering tips to reduce volume without missing
-                threats. Includes sample detection rules and false positive mitigation strategies.
+                Coming Soon...
               </p>
               <div className="card__actions">
                 <a className="link" href="#">Read article →</a>

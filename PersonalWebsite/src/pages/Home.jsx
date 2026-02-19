@@ -5,13 +5,11 @@ import Footer from '../components/Footer.jsx'
 import BootScreen from '../components/BootScreen.jsx'
 import CertLightbox from '../components/CertLightbox.jsx'
 import ScrollProgress from '../components/ScrollProgress.jsx'
-import AudioVisualizer from '../components/AudioVisualizer.jsx'
 import { useScrollObserver } from '../hooks/useScrollObserver.js'
-import { useCardTilt } from '../hooks/useCardTilt.js'
 import knimeCert  from '../assets/knimecert.png'
 import udemyCert  from '../assets/udemycert.png'
 
-/* ── Typewriter with human timing ── */
+/* ── Typewriter ── */
 function useTypewriter(phrases) {
   const [displayed, setDisplayed] = useState('')
   const [phraseIdx, setPhraseIdx] = useState(0)
@@ -40,7 +38,7 @@ function useTypewriter(phrases) {
           setPhraseIdx(i => (i + 1) % phrases.length)
         }
       }
-    }, deleting ? 40 + Math.random() * 30 : 65 + Math.random() * 65)
+    }, deleting ? 38 + Math.random() * 28 : 62 + Math.random() * 60)
     return () => clearTimeout(timeout)
   }, [charIdx, deleting, paused, phraseIdx, phrases])
 
@@ -87,24 +85,24 @@ function SplitTitle({ children }) {
   return <h1 className="title" ref={titleRef}>{children}</h1>
 }
 
-/* ── Particle canvas ── */
+/* ── Particle canvas (light-mode tinted) ── */
 function HeroParticles() {
   const canvasRef = useRef(null)
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    const COUNT = 60
+    const COUNT = 55
     const CHARS = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ'
     const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight }
     resize()
     window.addEventListener('resize', resize, { passive: true })
     const particles = Array.from({ length: COUNT }, () => ({
       x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-      speed: 0.25 + Math.random() * 0.65,
+      speed: 0.22 + Math.random() * 0.55,
       char: CHARS[Math.floor(Math.random() * CHARS.length)],
-      opacity: 0.04 + Math.random() * 0.16,
-      size: 10 + Math.random() * 7, changeTimer: 0,
+      opacity: 0.04 + Math.random() * 0.10,
+      size: 10 + Math.random() * 6, changeTimer: 0,
       isColumn: Math.random() > 0.7,
     }))
     let rafId
@@ -112,14 +110,14 @@ function HeroParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       particles.forEach(p => {
         p.y += p.speed; p.changeTimer++
-        if (p.changeTimer > 35) { p.char = CHARS[Math.floor(Math.random() * CHARS.length)]; p.changeTimer = 0 }
+        if (p.changeTimer > 38) { p.char = CHARS[Math.floor(Math.random() * CHARS.length)]; p.changeTimer = 0 }
         if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * canvas.width }
         ctx.globalAlpha = p.opacity
-        ctx.fillStyle = '#34d399'
+        ctx.fillStyle = '#059669'
         ctx.font = `${p.size}px 'DM Mono', monospace`
         ctx.fillText(p.char, p.x, p.y)
         if (p.isColumn) {
-          ctx.globalAlpha = p.opacity * 0.25
+          ctx.globalAlpha = p.opacity * 0.22
           ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], p.x, p.y - p.size)
         }
       })
@@ -131,7 +129,7 @@ function HeroParticles() {
   return <canvas ref={canvasRef} style={{ position:'absolute',inset:0,width:'100%',height:'100%',zIndex:2,pointerEvents:'none' }}></canvas>
 }
 
-/* ── Radar + status ── */
+/* ── Radar blips ── */
 function RadarBlips() {
   const containerRef = useRef(null)
   const statusRef    = useRef(null)
@@ -173,29 +171,19 @@ function RadarBlips() {
   }, [])
   return (
     <>
-      <div id="radar-container" ref={containerRef}></div>
-      <div id="status-display" className="status-text" ref={statusRef}>SYSTEM_IDLE</div>
+      <div ref={containerRef}></div>
+      <div className="status-text" ref={statusRef}>SYSTEM_IDLE</div>
       <div className="coord-display" ref={coordRef}>LAT: ---.---- LON: ---.----</div>
     </>
   )
 }
 
-/* ── Cert card ── */
-function CertCard({ src, alt, title, meta, onOpen }) {
-  return (
-    <div className="cert-card" onClick={() => onOpen(src, alt)}>
-      <img src={src} alt={alt} className="cert-img" />
-      <div className="cert-details"><h3>{title}</h3><p>{meta}</p></div>
-    </div>
-  )
-}
-
 const TYPEWRITER_PHRASES = [
-  'Cybersecurity Student',
-  'Ethical Hacker',
-  'Digital Forensics Analyst',
-  'Security Researcher',
-  'Incident Responder',
+  'Zero Trust Architecture',
+  'Confidentiality, Integrity and Availability',
+  'Virtual Private Networks',
+  'Encryption and Decryption',
+  'Authentication and Authorization',
 ]
 
 export default function Home() {
@@ -207,7 +195,6 @@ export default function Home() {
   const typeText = useTypewriter(TYPEWRITER_PHRASES)
 
   useScrollObserver()
-  useCardTilt()
 
   // Decipher name
   useEffect(() => {
@@ -244,7 +231,7 @@ export default function Home() {
       const cx = (e.clientX - r.left) / r.width  - 0.5
       const cy = (e.clientY - r.top)  / r.height - 0.5
       if (l1) l1.style.transform = `translate(${cx * -16}px, ${cy * -10}px)`
-      if (l2) l2.style.transform = `translate(${cx * -30}px, ${cy * -20}px)`
+      if (l2) l2.style.transform = `translate(${cx * -28}px, ${cy * -18}px)`
     }
     poster.addEventListener('mousemove', onMove)
     return () => poster.removeEventListener('mousemove', onMove)
@@ -267,7 +254,6 @@ export default function Home() {
           <div className="poster__layer" ref={layer2Ref}><div className="poster__orb poster__orb--2"></div></div>
           <HeroParticles />
           <RadarBlips />
-          <AudioVisualizer />
           <div className="poster__corner poster__corner--tl"></div>
           <div className="poster__corner poster__corner--tr"></div>
           <div className="poster__corner poster__corner--bl"></div>
@@ -280,12 +266,12 @@ export default function Home() {
             </SplitTitle>
 
             <p className="lead" style={{ marginBottom: '0.25rem' }}>
-              <span style={{ color:'var(--green)', fontFamily:'var(--mono)', fontSize:'clamp(13px,1.3vw,16px)', letterSpacing:'0.06em' }}>
+              <span style={{ color:'var(--green)', fontFamily:'var(--mono)', fontSize:'clamp(13px,1.3vw,16px)', letterSpacing:'0.05em' }}>
                 {typeText}<span className="typewriter-cursor"></span>
               </span>
             </p>
 
-            <p className="lead" style={{ animationDelay:'1.3s', marginTop:'1.25rem' }}>
+            <p className="lead" style={{ animationDelay:'1.3s', marginTop:'1.2rem' }}>
               Welcome to my portfolio! I'm a Year 2 Cybersecurity student at Temasek Polytechnic.
               Here you can find my past projects, blogs and ways you can reach out to me. Have a look!
             </p>
@@ -303,7 +289,6 @@ export default function Home() {
             <div className="about-header-flex">
               <div className="about-text-content">
                 <div className="section__head">
-                  {/* Plain heading with glow underline — no glitch pseudo-elements */}
                   <h2 className="section-heading-glow">About Me</h2>
                 </div>
                 <p className="lead lead--sm">
@@ -333,7 +318,8 @@ export default function Home() {
                   <li><strong>Forensics</strong> — Autopsy, FTK, ExifTool</li>
                   <li><strong>Penetration Testing</strong> — Kali Linux, Metasploit Framework, OWASP ZAP, Burp</li>
                   <li><strong>Networking</strong> — Cisco Packet Tracer, GNS3</li>
-                  <li><strong>Programming &amp; Development</strong> — Python, HTML, CSS, React</li>
+                  <li><strong>Programming &amp; Development</strong> — Python, HTML, CSS, SQL</li>
+                  <li><strong>Design &amp; Prototyping</strong> — Canva, Figma</li>
                   <li><strong>General Applications</strong> — Word, PowerPoint, Visual Studio Code, GitHub</li>
                 </ul>
               </div>
@@ -348,8 +334,20 @@ export default function Home() {
               <h2 className="section-heading-glow">Certifications</h2>
             </div>
             <div className="cert-grid">
-              <CertCard src={knimeCert} alt="KNIME Certification" title="Basic Proficiency in KNIME Analytics Platform" meta="Issued: Aug 2024 · by KNIME" onOpen={(s,a) => setLightbox({src:s,alt:a})} />
-              <CertCard src={udemyCert} alt="Udemy Certification" title="The Modern Python Bootcamp" meta="Issued: Nov 2025 · by Udemy" onOpen={(s,a) => setLightbox({src:s,alt:a})} />
+              <div className="cert-card" onClick={() => setLightbox({ src: knimeCert, alt: 'KNIME Certification' })}>
+                <img src={knimeCert} alt="KNIME Certification" className="cert-img" />
+                <div className="cert-details">
+                  <h3>Basic Proficiency in KNIME Analytics Platform</h3>
+                  <p>Issued: Aug 2024 · by KNIME</p>
+                </div>
+              </div>
+              <div className="cert-card" onClick={() => setLightbox({ src: udemyCert, alt: 'Udemy Certification' })}>
+                <img src={udemyCert} alt="Udemy Certification" className="cert-img" />
+                <div className="cert-details">
+                  <h3>The Modern Python Bootcamp</h3>
+                  <p>Issued: Nov 2025 · by Udemy</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
