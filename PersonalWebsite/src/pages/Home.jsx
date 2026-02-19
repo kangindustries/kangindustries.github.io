@@ -396,7 +396,7 @@ export default function Home() {
               <div className="stack">
                 <a className="stackbtn" href="https://www.linkedin.com/in/yap-kang-b84755304/" target="_blank" rel="noopener noreferrer"><span>LinkedIn — Connect with me</span></a>
                 <a className="stackbtn" href="mailto:yap.kang@gmail.com"><span>Email — Reach out directly</span></a>
-                <a className="stackbtn" href="https://github.com/kangindustries"><span>GitHub</span></a>
+                <a className="stackbtn" href="https://github.com/kangindustries"><span>GitHub — Let's collaborate</span></a>
               </div>
             </div>
           </div>
