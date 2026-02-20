@@ -332,13 +332,13 @@ export default function Home() {
                 <h2 className="h3">Modules Completed:</h2>
                 <ul className="list">
                   <li><strong>Ethical Hacking &amp; Intrusion Prevention</strong> — Vulnerability assessments using Metasploit, mapped to MITRE ATT&amp;CK.</li>
-                  <li><strong>Forensics in Digital Security</strong> — NTFS, EXT4 and Apple filesystems; file recovery techniques.</li>
+                  <li><strong>Forensics in Digital Security</strong> — NTFS, EXT4, exFAT, and Apple filesystems; file recovery techniques.</li>
                   <li><strong>Server Administration &amp; Security</strong> — Linux server hardening, service configuration and security.</li>
                   <li><strong>Enterprise Networking</strong> — RIP/OSPF routing, DNS, FTP and SSH configuration.</li>
-                  <li><strong>Secure Web Applications</strong> — Encryption, authentication, input validation in web systems.</li>
-                  <li><strong>Incident Response &amp; Management</strong> — Wireshark traffic analysis, SIEM configuration and threat detection.</li>
+                  <li><strong>Secure Web Applications</strong> — Encryption, authentication and input validation in web systems.</li>
+                  <li><strong>Incident Response &amp; Management</strong> — Wireshark traffic analysis, SIEM configurations and threat detection.</li>
                   <li><strong>Network Security</strong> — Firewall and VPN service configuration across network topologies.</li>
-                  <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against CIS benchmarks and compliance frameworks.</li>
+                  <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against benchmarks and compliance frameworks.</li>
                 </ul>
               </div>
               <div className="panel">
@@ -350,7 +350,7 @@ export default function Home() {
                   <li><strong>Networking</strong> — Cisco Packet Tracer, GNS3</li>
                   <li><strong>Programming &amp; Development</strong> — Python, HTML, CSS, SQL</li>
                   <li><strong>Design &amp; Prototyping</strong> — Canva, Figma</li>
-                  <li><strong>General Applications</strong> — Word, PowerPoint, Visual Studio Code, GitHub</li>
+                  <li><strong>Workflow</strong> — Visual Studio Code, GitHub</li>
                 </ul>
               </div>
             </div>
