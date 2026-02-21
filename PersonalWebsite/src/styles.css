@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap');
+/* ═══════════════════════════════════════════════════════════════
+   KANG INDUSTRIES  ·  CLASSIFIED PORTFOLIO  ·  LIGHT MODE
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   --bg:            #f5f5f7;
@@ -24,7 +28,7 @@
   --space-16:64px;--space-20:80px;
   --r-sm:4px;--r-md:8px;--r-lg:14px;--r-xl:20px;
   --nav-h:72px;--max-w:1280px;
-  --sans:'League Spartan',sans-serif;
+  --sans:'Inter',sans-serif;
   --mono:'DM Mono','Courier New',monospace;
   --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
   --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
@@ -256,7 +260,7 @@ img{display:block;max-width:100%}
 .panel:hover{border-color:var(--border-green);background:var(--surface-2);box-shadow:var(--shadow-card),var(--shadow-glow)}
 .panel:hover::before{opacity:1}
 /* DM Mono for panel headers only */
-.panel h2,.panel .h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);margin:0 0 var(--space-5)}
+.panel h2,.panel .h3{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);margin:0 0 var(--space-5)}
 
 /* ─── LISTS ───────────────────────────────────────────────────── */
 .list{list-style:none;margin:var(--space-5) 0 0;color:var(--text-2)}

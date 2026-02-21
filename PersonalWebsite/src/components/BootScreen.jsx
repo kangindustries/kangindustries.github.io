@@ -2,11 +2,9 @@ import { useEffect, useRef } from 'react'
 
 const BOOT_LINES = [
   '> KANG_INDUSTRIES OS v3.0.0',
-  '> Initializing security modules...',
-  '> Loading cryptographic keys... [OK]',
-  '> Mounting forensics toolkit... [OK]',
-  '> Connecting to threat intel feed... [OK]',
-  '> Calibrating SIEM detection rules... [OK]',
+  '> Initializing...',
+  '> Verifying your identity... [OK]',
+  '> Connecting... [OK]',
   '> All systems operational.',
   '> WELCOME.',
 ]
