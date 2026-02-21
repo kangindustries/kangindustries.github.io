@@ -97,15 +97,15 @@ export default function Projects() {
                 <div className="tags">
                   <span className="tag">HTML</span>
                   <span className="tag">JS</span>
+                  <span className="tag">Personal Project</span>
                 </div>
               </div>
               <p className="card__body">
-                A tool to encode and decode text using a Caesar Cipher (Shift 0-25) A Caesar Cipher is a simple way of encrypting messages
+                A tool to encode and decode text using a Caesar Cipher (Shift 0-25). A Caesar Cipher is a simple way of encrypting messages
                 by replacing a letter with a different one down a few places in the alphabet. 
               </p>
               <div className="card__actions">
                 <a className="link" href="#">Github Repository →</a>
-                <a className="link" href="#">Live Demo →</a>
               </div>
             </article>
 

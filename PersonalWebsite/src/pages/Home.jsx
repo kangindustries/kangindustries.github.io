@@ -6,16 +6,16 @@ import BootScreen from '../components/BootScreen.jsx'
 import CertLightbox from '../components/CertLightbox.jsx'
 import ScrollProgress from '../components/ScrollProgress.jsx'
 import { useScrollObserver } from '../hooks/useScrollObserver.js'
-import knimeCert  from '../assets/knimecert.png'
-import udemyCert  from '../assets/udemycert.png'
+import knimeCert from '../assets/knimecert.png'
+import udemyCert from '../assets/udemycert.png'
 
 /* ── Typewriter ── */
 function useTypewriter(phrases) {
   const [displayed, setDisplayed] = useState('')
   const [phraseIdx, setPhraseIdx] = useState(0)
-  const [charIdx,   setCharIdx]   = useState(0)
-  const [deleting,  setDeleting]  = useState(false)
-  const [paused,    setPaused]    = useState(false)
+  const [charIdx, setCharIdx] = useState(0)
+  const [deleting, setDeleting] = useState(false)
+  const [paused, setPaused] = useState(false)
 
   useEffect(() => {
     if (paused) return
@@ -54,12 +54,12 @@ function SplitTitle({ children }) {
     function processNode(node) {
       if (node.nodeType === Node.TEXT_NODE) {
         const frag = document.createDocumentFragment()
-        ;[...node.textContent].forEach(ch => {
-          const span = document.createElement('span')
-          span.className = 'char'
-          span.textContent = ch === ' ' ? '\u00a0' : ch
-          frag.appendChild(span)
-        })
+          ;[...node.textContent].forEach(ch => {
+            const span = document.createElement('span')
+            span.className = 'char'
+            span.textContent = ch === ' ' ? '\u00a0' : ch
+            frag.appendChild(span)
+          })
         return frag
       }
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -77,8 +77,8 @@ function SplitTitle({ children }) {
     let chars = title.querySelectorAll('.char')
     while (chars[0] && isWS(chars[0].textContent)) { chars[0].remove(); chars = title.querySelectorAll('.char') }
     chars = title.querySelectorAll('.char')
-    while (chars[chars.length-1] && isWS(chars[chars.length-1].textContent)) {
-      chars[chars.length-1].remove(); chars = title.querySelectorAll('.char')
+    while (chars[chars.length - 1] && isWS(chars[chars.length - 1].textContent)) {
+      chars[chars.length - 1].remove(); chars = title.querySelectorAll('.char')
     }
     title.querySelectorAll('.char').forEach((s, i) => { s.style.animationDelay = `${0.5 + i * 0.04}s` })
   }, [])
@@ -126,23 +126,23 @@ function HeroParticles() {
     tick()
     return () => { cancelAnimationFrame(rafId); window.removeEventListener('resize', resize) }
   }, [])
-  return <canvas ref={canvasRef} style={{ position:'absolute',inset:0,width:'100%',height:'100%',zIndex:2,pointerEvents:'none' }}></canvas>
+  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 2, pointerEvents: 'none' }}></canvas>
 }
 
 /* ── Radar blips ── */
 function RadarBlips() {
   const containerRef = useRef(null)
-  const statusRef    = useRef(null)
-  const coordRef     = useRef(null)
+  const statusRef = useRef(null)
+  const coordRef = useRef(null)
   useEffect(() => {
     const container = containerRef.current
-    const statusEl  = statusRef.current
-    const coordEl   = coordRef.current
+    const statusEl = statusRef.current
+    const coordEl = coordRef.current
     if (!container || !statusEl) return
     const phrases = [
-      'INCIDENT_RESPONSE','NETWORK_SECURITY','IT_AUDITING','DIGITAL_FORENSICS',
-      'MALWARE_ANALYSIS','ETHICAL_HACKING','SERVER_ADMINISTRATION',
-      'INTRUSION_PREVENTION','SECURE_WEB_APPLICATIONS','THREAT_INTELLIGENCE'
+      'INCIDENT_RESPONSE', 'NETWORK_SECURITY', 'IT_AUDITING', 'DIGITAL_FORENSICS',
+      'MALWARE_ANALYSIS', 'ETHICAL_HACKING', 'SERVER_ADMINISTRATION',
+      'INTRUSION_PREVENTION', 'THREAT_INTELLIGENCE'
     ]
     const decode = (text) => {
       const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
@@ -152,7 +152,7 @@ function RadarBlips() {
           idx < i ? text[idx] : alpha[Math.floor(Math.random() * alpha.length)]
         ).join('')
         if (i >= text.length) clearInterval(iv)
-        i += 1/3
+        i += 1 / 3
       }, 28)
     }
     const spawnBlip = () => {
@@ -187,7 +187,7 @@ const TYPEWRITER_PHRASES = [
 ]
 
 export default function Home() {
-  const nameRef   = useRef(null)
+  const nameRef = useRef(null)
   const posterRef = useRef(null)
   const layer1Ref = useRef(null)
   const layer2Ref = useRef(null)
@@ -201,7 +201,7 @@ export default function Home() {
     const el = nameRef.current
     if (!el) return
     const target = 'Yap Kang'
-    const chars  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?'
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?'
     let iteration = 0
     el.textContent = target
     const t = setTimeout(() => {
@@ -212,7 +212,7 @@ export default function Home() {
           return chars[Math.floor(Math.random() * chars.length)]
         }).join('')
         if (iteration >= target.length) clearInterval(iv)
-        iteration += 1/4
+        iteration += 1 / 4
       }, 40)
     }, 2800)
     return () => clearTimeout(t)
@@ -228,8 +228,8 @@ export default function Home() {
       const r = poster.getBoundingClientRect()
       poster.style.setProperty('--mx', (e.clientX - r.left) + 'px')
       poster.style.setProperty('--my', (e.clientY - r.top) + 'px')
-      const cx = (e.clientX - r.left) / r.width  - 0.5
-      const cy = (e.clientY - r.top)  / r.height - 0.5
+      const cx = (e.clientX - r.left) / r.width - 0.5
+      const cy = (e.clientY - r.top) / r.height - 0.5
       if (l1) l1.style.transform = `translate(${cx * -16}px, ${cy * -10}px)`
       if (l2) l2.style.transform = `translate(${cx * -28}px, ${cy * -18}px)`
     }
@@ -266,12 +266,12 @@ export default function Home() {
             </SplitTitle>
 
             <p className="lead" style={{ marginBottom: '0.25rem' }}>
-              <span style={{ color:'var(--green)', fontFamily:"'DM Mono',monospace", fontSize:'clamp(13px,1.3vw,16px)', letterSpacing:'0.05em' }}>
+              <span style={{ color: 'var(--green)', fontFamily: "'DM Mono',monospace", fontSize: 'clamp(13px,1.3vw,16px)', letterSpacing: '0.05em' }}>
                 {typeText}<span className="typewriter-cursor"></span>
               </span>
             </p>
 
-            <p className="lead" style={{ animationDelay:'1.3s', marginTop:'1.2rem' }}>
+            <p className="lead" style={{ animationDelay: '1.3s', marginTop: '1.2rem' }}>
               Welcome to my portfolio! I'm a Year 2 Cybersecurity student at Temasek Polytechnic.
               Here you can find my past projects, blogs and ways you can reach out to me. Have a look!
             </p>
@@ -281,19 +281,19 @@ export default function Home() {
               <a className="btn btn--secondary" href="#about">Learn More About Me</a>
             </div>
 
-            <div style={{ display:'flex', gap:'14px', marginTop:'28px', opacity:0, animation:'slideUp 0.75s var(--ease-out-expo) 1.9s forwards' }}>
+            <div style={{ display: 'flex', gap: '14px', marginTop: '28px', opacity: 0, animation: 'slideUp 0.75s var(--ease-out-expo) 1.9s forwards' }}>
               <a
                 href="https://www.linkedin.com/in/yap-kang-b84755304/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                style={{ display:'flex', alignItems:'center', justifyContent:'center', width:40, height:40, borderRadius:8, border:'1px solid var(--border-2)', background:'var(--surface)', color:'var(--text-2)', transition:'border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.3s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor='var(--border-green)'; e.currentTarget.style.color='var(--green)'; e.currentTarget.style.boxShadow='0 0 16px var(--green-glow)'; e.currentTarget.style.transform='translateY(-3px)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor='var(--border-2)'; e.currentTarget.style.color='var(--text-2)'; e.currentTarget.style.boxShadow='none'; e.currentTarget.style.transform='none' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 8, border: '1px solid var(--border-2)', background: 'var(--surface)', color: 'var(--text-2)', transition: 'border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.3s' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-green)'; e.currentTarget.style.color = 'var(--green)'; e.currentTarget.style.boxShadow = '0 0 16px var(--green-glow)'; e.currentTarget.style.transform = 'translateY(-3px)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-2)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none' }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
                 </svg>
               </a>
               <a
@@ -301,12 +301,12 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                style={{ display:'flex', alignItems:'center', justifyContent:'center', width:40, height:40, borderRadius:8, border:'1px solid var(--border-2)', background:'var(--surface)', color:'var(--text-2)', transition:'border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.3s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor='var(--border-green)'; e.currentTarget.style.color='var(--green)'; e.currentTarget.style.boxShadow='0 0 16px var(--green-glow)'; e.currentTarget.style.transform='translateY(-3px)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor='var(--border-2)'; e.currentTarget.style.color='var(--text-2)'; e.currentTarget.style.boxShadow='none'; e.currentTarget.style.transform='none' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 8, border: '1px solid var(--border-2)', background: 'var(--surface)', color: 'var(--text-2)', transition: 'border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.3s' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-green)'; e.currentTarget.style.color = 'var(--green)'; e.currentTarget.style.boxShadow = '0 0 16px var(--green-glow)'; e.currentTarget.style.transform = 'translateY(-3px)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-2)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none' }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                 </svg>
               </a>
             </div>
@@ -326,7 +326,8 @@ export default function Home() {
                   in such ways? That curiousity led me to pursue a Diploma in Cybersecurity and Digital Forensics,
                   where I am learning how to better protect digital systems and conduct
                   forensic investigations to fight and prevent cybercrime.
-                  <br />
+                </p>
+                <p className="lead lead--sm" style={{ marginTop: '1rem', animationDelay: '1.4s' }}>
                   I hope to further enhance my cybersecurity skills
                   while progressing through my course and I look forward to contributing to a safer digital world.
                 </p>
