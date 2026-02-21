@@ -322,8 +322,13 @@ export default function Home() {
                   <h2 className="section-heading-glow">About Me</h2>
                 </div>
                 <p className="lead lead--sm">
-                  I have a strong interest in learning how we can better protect our digital systems and conduct
+                  I have always been interested in technology for as long as I can remember. Why do computers, apps and networks work
+                  in such ways? That curiousity led me to pursue a Diploma in Cybersecurity and Digital Forensics,
+                  where I am learning how to better protect digital systems and conduct
                   forensic investigations to fight and prevent cybercrime.
+                  <br />
+                  I hope to further enhance my cybersecurity skills
+                  while progressing through my course and I look forward to contributing to a safer digital world.
                 </p>
               </div>
             </div>

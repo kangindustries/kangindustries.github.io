@@ -70,22 +70,20 @@ export default function Projects() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Coming Soon...</h2>
-                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Dec 2025 · Detection Engineering</p>
+                  <h2 className="h3">Password Strength Checker</h2>
+                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Sep 2025</p>
                 </div>
                 <div className="tags">
-                  <span className="tag">Test</span>
-                  <span className="tag">Test</span>
-                  <span className="tag">Test</span>
-                  <span className="tag">Test</span>
+                  <span className="tag">Python</span>
+                  <span className="tag">HTML</span>
+                  <span className="tag">Personal Project</span>
                 </div>
               </div>
               <p className="card__body">
-                Coming Soon...
+                A simple, robust password strength checker coded in Python. The password is evaluated for repeated characters, sequences, common words and more.
               </p>
               <div className="card__actions">
-                <a className="link" href="#">GitHub Repository →</a>
-                <a className="link" href="#">Full Writeup →</a>
+                <a className="link" href="https://github.com/kangindustries/Password-Checker">GitHub Repository →</a>
               </div>
             </article>
 
@@ -93,20 +91,20 @@ export default function Projects() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Coming Soon...</h2>
-                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Jan 2026 · Web Development</p>
+                  <h2 className="h3">Caesar Cipher Encoder/Decoder</h2>
+                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Dec 2025</p>
                 </div>
                 <div className="tags">
-                  <span className="tag">Test</span>
-                  <span className="tag">Test</span>
-                  <span className="tag">Test</span>
+                  <span className="tag">HTML</span>
+                  <span className="tag">JS</span>
                 </div>
               </div>
               <p className="card__body">
-                Coming Soon...
+                A tool to encode and decode text using a Caesar Cipher (Shift 0-25) A Caesar Cipher is a simple way of encrypting messages
+                by replacing a letter with a different one down a few places in the alphabet. 
               </p>
               <div className="card__actions">
-                <a className="link" href="#">Source Code →</a>
+                <a className="link" href="#">Github Repository →</a>
                 <a className="link" href="#">Live Demo →</a>
               </div>
             </article>
