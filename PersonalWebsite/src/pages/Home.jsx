@@ -335,7 +335,7 @@ export default function Home() {
             </div>
             <div className="about-grid">
               <div className="panel">
-                <h2 className="h3">Modules Completed:</h2>
+                <h2 className="h3">Course Modules Completed:</h2>
                 <ul className="list">
                   <li><strong>Ethical Hacking &amp; Intrusion Prevention</strong> — Vulnerability assessments using Metasploit, mapped to MITRE ATT&amp;CK.</li>
                   <li><strong>Forensics in Digital Security</strong> — NTFS, EXT4, exFAT, and Apple filesystems; file recovery techniques.</li>
@@ -354,6 +354,7 @@ export default function Home() {
                   <li><strong>Forensics</strong> — Autopsy, FTK, ExifTool</li>
                   <li><strong>Penetration Testing</strong> — Kali Linux, Metasploit Framework, OWASP ZAP, Burp</li>
                   <li><strong>Networking</strong> — Cisco Packet Tracer, GNS3</li>
+                  <li><strong>Operating Systems</strong> — Kali Linux, Windows</li>
                   <li><strong>Programming &amp; Development</strong> — Python, HTML, CSS, SQL</li>
                   <li><strong>Design &amp; Prototyping</strong> — Canva, Figma</li>
                   <li><strong>Workflow</strong> — Visual Studio Code, GitHub</li>

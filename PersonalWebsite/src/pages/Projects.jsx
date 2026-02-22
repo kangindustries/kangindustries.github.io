@@ -105,7 +105,7 @@ export default function Projects() {
                 by replacing a letter with a different one down a few places in the alphabet. 
               </p>
               <div className="card__actions">
-                <a className="link" href="#">Github Repository →</a>
+                <a className="link" href="https://github.com/kangindustries/Caesar-Cipher-Encoder-Decoder">Github Repository →</a>
               </div>
             </article>
 
