@@ -13,7 +13,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // After navigating home with scrollTo state, scroll to #contact
   useEffect(() => {
     if (location.pathname === '/' && location.state?.scrollTo === 'contact') {
       const timer = setTimeout(() => {
@@ -46,12 +45,6 @@ export default function Navbar() {
             to="/projects"
           >
             <span>Projects</span>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
-            to="/blog"
-          >
-            <span>Blog</span>
           </NavLink>
           <a className="nav__link" href="#contact" onClick={handleContact}>
             <span>Contact</span>
