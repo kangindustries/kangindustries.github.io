@@ -42,6 +42,12 @@ export default function Navbar() {
         <nav className="nav" aria-label="Primary">
           <NavLink
             className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
+            to="/"
+          >
+            <span>Home</span>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
             to="/projects"
           >
             <span>Projects</span>

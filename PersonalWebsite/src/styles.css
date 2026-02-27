@@ -341,6 +341,16 @@ img{display:block;max-width:100%}
 
 
 
+/* ─── MATERIAL ICONS ──────────────────────────────────────────── */
+.material-icons{
+  font-family:'Material Icons';
+  font-weight:normal;font-style:normal;font-size:24px;
+  line-height:1;letter-spacing:normal;text-transform:none;
+  display:inline-block;white-space:nowrap;word-wrap:normal;
+  direction:ltr;-webkit-font-feature-settings:'liga';
+  font-feature-settings:'liga';-webkit-font-smoothing:antialiased;
+}
+
 /* ─── ACCESSIBILITY ───────────────────────────────────────────── */
 ::selection{background:#3b6cf8;color:#fff}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:var(--r-sm)}
