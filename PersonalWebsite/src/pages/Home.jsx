@@ -330,7 +330,7 @@ export default function Home() {
               </div>
             </div>
             <div className="about-grid">
-              <div className="panel">
+              <div className="panel panel--with-btn">
                 <h2 className="h3" style={{display:"flex",alignItems:"center",gap:"10px"}}><span className="material-icons" style={{fontSize:"20px",verticalAlign:"middle"}}>school</span>Course Modules Completed:</h2>
                 <ul className="list">
                   <li><strong>Ethical Hacking &amp; Intrusion Prevention</strong> — Vulnerability assessments using Metasploit, mapped to MITRE ATT&amp;CK.</li>
@@ -342,8 +342,13 @@ export default function Home() {
                   <li><strong>Network Security</strong> — Firewall and VPN service configuration across network topologies.</li>
                   <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against benchmarks and compliance frameworks.</li>
                 </ul>
+
+                <Link to="/course-details" className="panel-readmore">
+                  Read More
+                </Link>
+
               </div>
-              <div className="panel">
+              <div className="panel panel--with-btn">
                 <h2 className="h3" style={{display:"flex",alignItems:"center",gap:"10px"}}><span className="material-icons" style={{fontSize:"20px",verticalAlign:"middle"}}>build</span>Tools &amp; Technologies:</h2>
                 <ul className="list">
                   <li><strong>Security Monitoring &amp; Detection</strong> — Wazuh, Wireshark, Snort IDS, Windows Defender Firewall</li>
@@ -355,6 +360,11 @@ export default function Home() {
                   <li><strong>Design &amp; Prototyping</strong> — Canva, Figma</li>
                   <li><strong>Workflow</strong> — Visual Studio Code, GitHub</li>
                 </ul>
+
+                <Link to="/tools-details" className="panel-readmore">
+                  Read More
+                </Link>
+
               </div>
             </div>
           </div>
@@ -395,6 +405,8 @@ export default function Home() {
               <p className="lead lead--sm">
                 Feel free to reach out. I'm open to collaborations and discussions,
                 especially if you're working on similar projects.
+
+              <br></br><br></br><strong>If there are any issues with the functionalities of this website, please drop me an email!</strong>
               </p>
               <div className="stack">
                 <a className="stackbtn" href="https://www.linkedin.com/in/yap-kang-b84755304/" target="_blank" rel="noopener noreferrer"><span>LinkedIn — Connect with me</span></a>
