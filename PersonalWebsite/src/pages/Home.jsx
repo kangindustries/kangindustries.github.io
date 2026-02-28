@@ -343,7 +343,7 @@ export default function Home() {
                   <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against benchmarks and compliance frameworks.</li>
                 </ul>
 
-                <Link to="/course-details" className="panel-readmore">
+                <Link to="/module-details" className="panel-readmore">
                   Read More
                 </Link>
 
@@ -361,7 +361,7 @@ export default function Home() {
                   <li><strong>Workflow</strong> — Visual Studio Code, GitHub</li>
                 </ul>
 
-                <Link to="/tools-details" className="panel-readmore">
+                <Link to="/module-details" className="panel-readmore">
                   Read More
                 </Link>
 

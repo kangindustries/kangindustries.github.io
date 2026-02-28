@@ -56,10 +56,10 @@ export default function Projects() {
         <div className="container">
           <div className="section__head">
             <div>
-              <span className="section__label page-title-reveal">// PROJECTS LOADING...</span>
-              <SplitTitle>Projects</SplitTitle>
+              <span className="section__label page-title-reveal">// PERSONAL PROJECTS LOADING...</span>
+              <SplitTitle>Personal Projects</SplitTitle>
               <p className="lead lead--sm page-desc-reveal">
-                A list of past projects I have completed, along with relevant code and documentation.
+                A list of personal projects I have completed, along with relevant code and documentation.
               </p>
             </div>
           </div>
