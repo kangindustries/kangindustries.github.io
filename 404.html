@@ -7,7 +7,7 @@
       (function () {
         var l = window.location;
         var newUrl =
-          l.protocol + "//" + l.host + l.pathname.split("/")[1] + "/?p=" +
+          l.protocol + "//" + l.host + "/?p=" +
           encodeURIComponent(l.pathname + l.search + l.hash);
         l.replace(newUrl);
       })();
