@@ -121,11 +121,13 @@ const MODULES = [
   {
     id: "network-security",
     title: "Network Security",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
+    subheading: "Module taken during Year 2 Semester 2 (October 2025 to February 2026).",
     overview:
-      "Placeholder text. Describe firewall/VPN concepts, segmentation, secure access, and how you configured/tested them.",
+      "This module covered a wide range of network security concepts, such as Firewalls, VPN services, Cryptography and ACLs. The tool used for this module is Cisco Packet Tracer to simulate real-world networks.",
     whatIDid: [
-      "Placeholder: Designed basic segmentation and access rules.",
+      `I was tasked with configuring my assigned network topology with the correct IP addresses, hardening routers and switches, and configuring the routing protocols throughout the network topology.
+      Online tools such as SolarWinds Free Subnet Calculator was used to efficiently and accurately. By doing so, I limited any wastage of IP addresses and improved network performance by ensuring that address blocks were allocated according to the hosts required.
+      The OSPF routing protocol was configured on layer 3 switches and routers to determine the best path to a destination in the network. Additionally, MD5 authentication was enabled to prevent rogue routers from forming adjacencies.`,
       "Placeholder: Configured firewall rules and tested allowed/blocked traffic.",
       "Placeholder: Set up a VPN scenario and verified secure connectivity.",
     ],
@@ -139,7 +141,7 @@ const MODULES = [
   {
     id: "it-audit",
     title: "IT Security Management & Audit",
-    subheading: "Module taken during Year 2 Semester 2 (October 2025 to Feb 2026).",
+    subheading: "Module taken during Year 2 Semester 2 (October 2025 to February 2026).",
     overview:
       "This module taught the basic fundamentals of auditing, such as the types of audits, the goal of auditing and the aspects of being a good auditor. I also learnt how to audit machines in accordance to benchmarks and bash scripting to automate tasks and assist in auditing.",
     whatIDid: [
