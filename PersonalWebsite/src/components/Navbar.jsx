@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import kangLogo from '../assets/kang_industries.png'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -37,7 +36,7 @@ export default function Navbar() {
     <header className={`topbar${scrolled ? ' scrolled' : ''}`}>
       <div className="container topbar__inner">
         <NavLink className="brand" to="/" aria-label="Home">
-          <img src={kangLogo} alt="Kang Industries" className="brand__img" />
+          <span className="brand__text">Yap Kang</span>
         </NavLink>
         <nav className="nav" aria-label="Primary">
           <NavLink
