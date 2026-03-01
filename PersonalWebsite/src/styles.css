@@ -344,15 +344,13 @@ img{display:block;max-width:100%}
 .panel::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);opacity:0;transition:opacity 0.3s}
 .panel:hover{border-color:var(--border-green);background:var(--surface);box-shadow:var(--shadow-card),var(--shadow-glow)}
 .panel:hover::before{opacity:1}
-
-/* Panel headings —*/
+/* Panel headings — */
 .panel h2,
 .panel .h3{
-  font-family: var(--sans);  
-  font-size: 15px;
+  font-family: var(--sans);
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--text);
   margin: 0 0 var(--space-5);
 }
@@ -733,6 +731,14 @@ img{display:block;max-width:100%}
   color: var(--green);
   box-shadow: 0 0 16px var(--green-glow);
   transform: translateY(-3px);
+}
+
+.footer__center {
+  text-align: center;
+  font-family: 'Satisfy', cursive;
+  font-size: 24px;
+  color: var(--text);
+  opacity: 0.9;
 }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────── */

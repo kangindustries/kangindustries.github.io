@@ -5,6 +5,10 @@ export default function Footer() {
 
         <p>Copyright © 2026 Yap Kang.</p>
 
+        <div className="footer__center">
+          Yap Kang
+        </div>
+
         <div className="footer__icons">
           <a
             href="https://www.linkedin.com/in/yap-kang-b84755304/"
