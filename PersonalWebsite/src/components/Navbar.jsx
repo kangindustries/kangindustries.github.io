@@ -34,28 +34,35 @@ export default function Navbar() {
 
   return (
     <header className={`topbar${scrolled ? ' scrolled' : ''}`}>
-      <div className="container topbar__inner">
-        <NavLink className="brand" to="/" aria-label="Home">
-          <span className="brand__text">Yap Kang</span>
+  <div className="container topbar__inner">
+    <div className="topbar__pill">
+      
+      <NavLink className="brand" to="/" aria-label="Home">
+        <span className="brand__text">Yap Kang</span>
+      </NavLink>
+
+      <nav className="nav">
+        <NavLink
+          className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
+          to="/"
+        >
+          <span>Home</span>
         </NavLink>
-        <nav className="nav" aria-label="Primary">
-          <NavLink
-            className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
-            to="/"
-          >
-            <span>Home</span>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
-            to="/projects"
-          >
-            <span>Projects</span>
-          </NavLink>
-          <a className="nav__link" href="#contact" onClick={handleContact}>
-            <span>Contact</span>
-          </a>
-        </nav>
-      </div>
-    </header>
+
+        <NavLink
+          className={({ isActive }) => `nav__link${isActive ? ' active' : ''}`}
+          to="/projects"
+        >
+          <span>Projects</span>
+        </NavLink>
+
+        <a className="nav__link" href="#contact" onClick={handleContact}>
+          <span>Contact</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+</header>
   )
 }

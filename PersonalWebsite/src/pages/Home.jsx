@@ -357,7 +357,7 @@ export default function Home() {
                   I have always been interested in technology for as long as I can remember. Why do computers, apps and networks work in such ways? That curiosity led me to pursue a Diploma in Cybersecurity and Digital Forensics, where I am learning how to better protect digital systems and conduct forensic investigations to fight and prevent cybercrime.
                 </p>
                 <p className="lead lead--sm" style={{ marginTop: '1rem', animationDelay: '1.4s' }}>
-                  I hope to further enhance my cybersecurity skills while progressing through my course and I look forward to contributing to a safer digital world.
+                  I hope to further enhance my cybersecurity skills while progressing through my course and I look forward to contributing to a safer digital world. 
                 </p>
               </div>
             </div>
