@@ -359,6 +359,8 @@ export default function Home() {
                 <p className="lead lead--sm" style={{ marginTop: '1rem', animationDelay: '1.4s' }}>
                   I hope to further enhance my cybersecurity skills while progressing through my course and I look forward to contributing to a safer digital world. 
                 </p>
+                
+                <p className="about-signoff">— Yap Kang</p>
               </div>
             </div>
             <div className="about-grid">
