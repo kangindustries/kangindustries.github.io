@@ -13,7 +13,6 @@ const MODULES = [
   {
     id: "ethical-hacking",
     title: "Ethical Hacking & Intrusion Prevention",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
     overview:
       "Placeholder text. Explain what this module covered at a high level. Mention the scope (tools, techniques, concepts) and the kind of work you performed (labs, write-ups, etc.).",
     whatIDid: [
@@ -31,7 +30,6 @@ const MODULES = [
   {
     id: "forensics-digital",
     title: "Forensics in Digital Security",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
     overview:
       "Placeholder text. Explain what this module covered at a high level. Mention the scope (filesystems, artifacts, tools) and the kind of investigations you performed.",
     whatIDid: [
@@ -49,7 +47,6 @@ const MODULES = [
   {
     id: "server-admin",
     title: "Server Administration & Security",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
     overview:
       "Placeholder text. Describe server hardening concepts, service configuration, access controls, and what you practiced.",
     whatIDid: [
@@ -67,7 +64,6 @@ const MODULES = [
   {
     id: "enterprise-networking",
     title: "Enterprise Networking",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
     overview:
       "Placeholder text. Describe routing/switching concepts, enterprise services (DNS/SSH/FTP), and what your labs involved.",
     whatIDid: [
@@ -85,13 +81,12 @@ const MODULES = [
   {
     id: "secure-web",
     title: "Secure Web Applications",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
     overview:
-      "Placeholder text. Describe authentication, input validation, encryption basics, and common web risks.",
+      "This subject focuses on secure web application design and development. We were taught best practices such as the OWASP Top 10 to counter common threats and vulnerabilities in web applications.",
     whatIDid: [
-      "Placeholder: Implemented secure input handling and validation.",
-      "Placeholder: Practiced authentication/authorization concepts in a web flow.",
-      "Placeholder: Tested security controls and wrote up findings.",
+      `My groupmates and I proposed a marketplace web application as a solution to an issue faced by the school.
+      My responsibility was to implement CRUD operations for the Administrator account of the marketplace. To ensure zero trust and multiple layers of security, I implemented various OWASP Top 10 mitigations from the years 2017 and 2021.`,
+      `The mitigations include prepared statements and parameterized queries for Injection, MIME type validation to prevent unrestricted uploads of any file type, and resource management/input constraints to prevent DoS and resource exhaustion.`,
     ],
     takeaways:
       "Placeholder text. Summarize how your secure coding mindset improved (threats → controls).",
@@ -103,11 +98,10 @@ const MODULES = [
   {
     id: "incident-response",
     title: "Incident Response & Management",
-    subheading: "Placeholder: key outcomes, labs, or assessment style for this module.",
     overview:
-      "Placeholder text. Describe traffic analysis, SIEM concepts, detection workflow, and response steps.",
+      "This module covered the concepts of incident response, the tools and techniques to handle an incident and post-incident investigations.",
     whatIDid: [
-      "Placeholder: Analyzed traffic captures and identified suspicious behavior.",
+      "I have mastered the various concepts of incident response, including .",
       "Placeholder: Wrote alerts/queries or tuned detection logic.",
       "Placeholder: Created an incident report with timeline and recommendations.",
     ],
@@ -121,7 +115,6 @@ const MODULES = [
   {
     id: "network-security",
     title: "Network Security",
-    subheading: "Module taken during Year 2 Semester 2 (October 2025 to February 2026).",
     overview:
       "This module covered a wide range of network security concepts, such as Firewalls, VPN services, Cryptography and ACLs. The tool used for this module is Cisco Packet Tracer to simulate real-world networks.",
     whatIDid: [
@@ -141,7 +134,6 @@ const MODULES = [
   {
     id: "it-audit",
     title: "IT Security Management & Audit",
-    subheading: "Module taken during Year 2 Semester 2 (October 2025 to February 2026).",
     overview:
       "This module taught the basic fundamentals of auditing, such as the types of audits, the goal of auditing and the aspects of being a good auditor. I also learnt how to audit machines in accordance to benchmarks and bash scripting to automate tasks and assist in auditing.",
     whatIDid: [
@@ -266,7 +258,6 @@ export default function ModuleDetails() {
                   <section key={m.id} id={m.id} className="article-section">
                     <header className="article-section__head">
                       <h2 className="article-h2">{m.title}</h2>
-                      <div className="article-section__sub">{m.subheading}</div>
                     </header>
 
                     <div className="article-grid">
@@ -274,19 +265,19 @@ export default function ModuleDetails() {
                         <h3 className="article-h3">Overview</h3>
                         <p>{m.overview}</p>
 
-                        <h3 className="article-h3">What I did</h3>
+                        <h3 className="article-h3">What I Did</h3>
                         <ul className="article-bullets">
                           {m.whatIDid.map((item, idx) => (
                             <li key={idx}>{item}</li>
                           ))}
                         </ul>
 
-                        <h3 className="article-h3">Key takeaways</h3>
+                        <h3 className="article-h3">Key Takeaways</h3>
                         <p>{m.takeaways}</p>
                       </div>
 
                       <div className="article-block">
-                        <h3 className="article-h3">Evidence / screenshots</h3>
+                        <h3 className="article-h3">Screenshots</h3>
 
                         {/* Replace with real <img src={...} /> later */}
                         <div className="figure">
