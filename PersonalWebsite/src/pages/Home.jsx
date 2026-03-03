@@ -186,6 +186,11 @@ const TYPEWRITER_PHRASES = [
   'Authentication and Authorization',
 ]
 
+const tools = [
+  "Kali Linux", "Windows", "Autopsy", "FTK", "MITRE ATT&CK Framework and Navigator", "Cisco Packet Tracer",
+  "Wireshark", "Wazuh", "Burp Suite", "OWASP ZAP", "Metasploit", "Nmap", "Canva", "Figma", "VS Code", "GitHub", "Python", "HTML", "CSS", "SQL"
+]
+
 export default function Home() {
   const nameRef = useRef(null)
   const posterRef = useRef(null)
@@ -272,8 +277,7 @@ export default function Home() {
             </p>
 
             <p className="lead" style={{ animationDelay: '1.3s', marginTop: '1.2rem' }}>
-              Welcome to my portfolio! I'm a Year 2 student at Temasek Polytechnic studying Cybersecurity and Digital Forensics.
-              Here you can find information about my education, personal projects, and ways you can reach out to me. Have a look!
+              I'm a Year 2 student at Temasek Polytechnic studying Cybersecurity and Digital Forensics.
             </p>
 
             <div className="actions">
@@ -342,6 +346,14 @@ export default function Home() {
                 </span>
               </a>
             </div>
+            <div className="scroll-indicator">
+              <a href="#about" className="scroll-link">
+                <span className="scroll-text">Scroll</span>
+                <span className="material-symbols-outlined scroll-icon">
+                  south
+                </span>
+              </a>
+            </div>
           </div>
         </section>
 
@@ -357,48 +369,190 @@ export default function Home() {
                   I have always been interested in technology for as long as I can remember. Why do computers, apps and networks work in such ways? That curiosity led me to pursue a Diploma in Cybersecurity and Digital Forensics, where I am learning how to better protect digital systems and conduct forensic investigations to fight and prevent cybercrime.
                 </p>
                 <p className="lead lead--sm" style={{ marginTop: '1rem', animationDelay: '1.4s' }}>
-                  I hope to further enhance my cybersecurity skills while progressing through my course and I look forward to contributing to a safer digital world. 
+                  I hope to further enhance my cybersecurity skills while progressing through my course and I look forward to contributing to a safer digital world.
                 </p>
-                
+
                 <p className="about-signoff">— Yap Kang</p>
               </div>
             </div>
-            <div className="about-grid">
-              <div className="panel panel--with-btn">
-                <h2 className="h3" style={{ display: "flex", alignItems: "center", gap: "10px" }}><span className="material-icons" style={{ fontSize: "20px", verticalAlign: "middle" }}>school</span>Course Modules Completed:</h2>
-                <ul className="list">
-                  <li><strong>Ethical Hacking &amp; Intrusion Prevention</strong> — Vulnerability assessments using Metasploit, mapped to MITRE ATT&amp;CK.</li>
-                  <li><strong>Forensics in Digital Security</strong> — NTFS, EXT4, exFAT, and Apple filesystems; file recovery techniques.</li>
-                  <li><strong>Server Administration &amp; Security</strong> — Linux server hardening, service configuration and security.</li>
-                  <li><strong>Enterprise Networking</strong> — RIP/OSPF routing, DNS, FTP and SSH configuration.</li>
-                  <li><strong>Secure Web Applications</strong> — Encryption, authentication and input validation in web systems.</li>
-                  <li><strong>Incident Response &amp; Management</strong> — Wireshark traffic analysis, SIEM configurations and threat detection.</li>
-                  <li><strong>Network Security</strong> — Firewall and VPN service configuration across network topologies.</li>
-                  <li><strong>IT Security Management &amp; Audit</strong> — Machine auditing against benchmarks and compliance frameworks.</li>
-                </ul>
+          </div>
+        </section>
 
-                <Link to="/module-details" className="panel-readmore">
-                  Read More
-                </Link>
+        <section className="section" id="modules">
+          <div className="container">
 
+            <div className="section__head">
+              <h2 className="section-heading-glow">Expertise</h2>
+            </div>
+
+            <p className="expertise-subtext">
+              See what I’ve done in school by expanding the fields below.
+            </p>
+
+            <div className="big-accordion">
+              <details className="big-item">
+                <summary className="big-summary">
+                  <span className="big-title">Networking</span>
+                  <span className="big-meta">ROUTING // FIREWALLS // IP ADDRESSING</span>
+                  <span className="big-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="big-content">
+                  <p>
+                    <strong><u>Tools: Cisco Packet Tracer</u></strong>
+                  </p>
+                  <p>
+                    Configured network topologies ranging from small home networks, to university campuses and WANs.
+                    Due to the nature of networks, they have private IP blocks for subnetting and public IP blocks for NAT. Properly subnetting the networks is crucial in limiting IP address wastage.
+                  </p>
+                  <p>
+                    Networks utilise a combination of static and RIP/OSPF routing to ensure high performance and availability.
+                  </p>
+                  <p>
+                    Another crucial aspect of networking is security. Switches and routers are configured to allow only specific devices to SSH inside, and I adhere to best practices by preventing routers from sharing routing information where it is not needed.
+                    Features like BPDU Guard and MD5/SHA authentication are implemented to ensure the networks are safe from a wide range of threats.
+                  </p>
+                </div>
+              </details>
+
+              <details className="big-item">
+                <summary className="big-summary">
+                  <span className="big-title">Digital Forensics</span>
+                  <span className="big-meta">FILESYSTEM ANALYSIS // COMPUTER FORENSICS // FORENSICS PROCESSES</span>
+                  <span className="big-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="big-content">
+                  <p>
+                    <strong><u>Tools: Autopsy, FTK, ExifTool</u></strong>
+                  </p>
+                  <p>
+                    Analysed a recovered disk containing emails to create a timeline of an incident for better visualisations.
+                    Created a relationship diagram to represent connections between the victim and other persons or entities.
+                  </p>
+                  <p>
+                    Maintained proper forensics processes including the chain of custody and maintaining a detailed forensic logbook alongside my teammates.
+                  </p>
+                </div>
+              </details>
+
+              <details className="big-item">
+                <summary className="big-summary">
+                  <span className="big-title">VAPT</span>
+                  <span className="big-meta">ETHICAL HACKING // SECURING WEB APPLICATIONS</span>
+                  <span className="big-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="big-content">
+                  <p>
+                    <strong><u>Tools: Metasploit Framework, Kali Linux OS, Burp Suite, OWASP ZAP, Nmap</u></strong>
+                  </p>
+                  <p>
+                    Utilised the Metasploit framework and a Kali Linux VM to document vulnerabilities and remediation strategies found in target systems.
+                    Focused on was SQL Injection, one of the most common web vulnerabilities according to OWASP, which gave me relevant exposure to its consequences and why attackers abuse it.
+                  </p>
+                  <p>
+                    Had to assess the severity of the vulnerability found using CVSS, which is the primary method used by many organisations.
+                  </p>
+                  <p>
+                    Responsible for implementing CRUD operations for the Administrator of a web-based marketplace. To ensure zero trust and multiple layers of security, I implemented several OWASP mitigations from the years 2017 to 2021.
+                  </p>
+                  <p>
+                    These mitigations include prepared statements and parameterized queries for Injection, MIME type validation to prevent unrestricted file uploads of any file type,
+                    and resource management/input constraints to prevent DoS and resource exhaustion.
+                  </p>
+                </div>
+              </details>
+
+              <details className="big-item">
+                <summary className="big-summary">
+                  <span className="big-title">Incident Response</span>
+                  <span className="big-meta">SIEM // PACKET ANALYSIS</span>
+                  <span className="big-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="big-content">
+                  <p>
+                    <strong><u>Tools: Wireshark, Wazuh SIEM, Kali Linux OS, MITRE ATT&CK, VirusTotal</u></strong>
+                  </p>
+                  <p>
+                    Experienced in using Wireshark to analyse network traffic.
+                    Using my extensive knowledge about Indicators of Compromise (IOCs), I am able to identify malicious traffic, such as Trickbot, Dridex and Qakbot infections to help respond and prevent future incidents.
+                    In addition, I am able to link them back to the MITRE ATT&CK framework and categorise them using tools such as the MITRE ATT&CK Navigator.
+                  </p>
+                  <p>
+                    Responsible for conducting data exfiltration using a technique of my choice.
+                    The technique chosen was exfiltration via webhook. Using Windows Powershell and a reverse shell, the attacker can extract a file of their choice from the victim machine.
+                    Conducted research into remediation and mitigation strategies for such a technique.
+                  </p>
+                </div>
+              </details>
+
+              <details className="big-item">
+                <summary className="big-summary">
+                  <span className="big-title">Auditing</span>
+                  <span className="big-meta">IT AUDITING // BASH SCRIPTING // RESEARCH</span>
+                  <span className="big-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="big-content">
+                  <div className="work-gallery">
+
+                    <figure className="work-shot">
+                      <img src={udemyCert} alt="Udemy course certificate" loading="lazy" />
+                      <figcaption>Example: Course completion</figcaption>
+                    </figure>
+                  </div>
+                  <p>
+                    Contributed to an auditing playbook for HIPAA, a U.S law that protects patient health information. Conducted research into how AI affects HIPAA auditing.
+                    The research covered emerging risks of AI, including cybersecurity threats, and how AI can be useful as a tool to provide continuous monitoring, enhances access controls and detect anomalies.
+                    Provided steps, recommendations and advice for organisations planning to implement AI systems.
+                  </p>
+                  <p>
+                    Audited a virtual machine in accordance to the CIS benchmarks, and explained the importance for certain configurations.
+                  </p>
+                </div>
+              </details>
+
+              <details className="big-item">
+                <summary className="big-summary">
+                  <span className="big-title">Others</span>
+                  <span className="big-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="big-content">
+                  <p>
+                    In addition to the tools and technologies listed above, I am also familiar with:
+                    <ul>
+                      <li>Canva and Figma (for Prototyping)</li>
+                      <li>Python, HTML and CSS (for Programming and Development).</li>
+                      <li>Visual Studio Code and GitHub (for Workflow)</li>
+                    </ul>
+                  </p>
+                </div>
+              </details>
+
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="tools">
+          <div className="container">
+            <div className="tools-rail" aria-label="Tools & Technologies">
+              <div className="tools-rail__head">
+                <p className="tools-rail__desc">
+                  A summary of the tools I am familiar with.
+                </p>
               </div>
-              <div className="panel panel--with-btn">
-                <h2 className="h3" style={{ display: "flex", alignItems: "center", gap: "10px" }}><span className="material-icons" style={{ fontSize: "20px", verticalAlign: "middle" }}>build</span>Tools &amp; Technologies:</h2>
-                <ul className="list">
-                  <li><strong>Security Monitoring &amp; Detection</strong> — Wazuh, Wireshark, Snort IDS, Windows Defender Firewall</li>
-                  <li><strong>Forensics</strong> — Autopsy, FTK, ExifTool</li>
-                  <li><strong>Penetration Testing</strong> — Kali Linux, Metasploit Framework, OWASP ZAP, Burp</li>
-                  <li><strong>Networking</strong> — Cisco Packet Tracer, GNS3</li>
-                  <li><strong>Operating Systems</strong> — Kali Linux, Windows</li>
-                  <li><strong>Programming &amp; Development</strong> — Python, HTML, CSS, SQL</li>
-                  <li><strong>Design &amp; Prototyping</strong> — Canva, Figma</li>
-                  <li><strong>Workflow</strong> — Visual Studio Code, GitHub</li>
-                </ul>
 
-                <Link to="/module-details" className="panel-readmore">
-                  Read More
-                </Link>
+              <div className="marquee" aria-hidden="true">
+                <div className="marquee__inner">
+                  <div className="marquee__group">
+                    {tools.map((t) => (
+                      <span className="tool-pill" key={t}>{t}</span>
+                    ))}
+                  </div>
 
+                  <div className="marquee__group">
+                    {tools.map((t) => (
+                      <span className="tool-pill" key={`dup-${t}`}>{t}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
 
-        <p>Copyright © 2026 Yap Kang.</p>
+        <p>Copyright © 2026 Yap Kang. All rights reserved.</p>
 
         <div className="footer__center">
           Yap Kang

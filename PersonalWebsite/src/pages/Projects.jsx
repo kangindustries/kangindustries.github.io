@@ -59,7 +59,7 @@ export default function Projects() {
               <span className="section__label page-title-reveal">// PERSONAL PROJECTS LOADING...</span>
               <SplitTitle>Personal Projects</SplitTitle>
               <p className="lead lead--sm page-desc-reveal">
-                A list of personal projects I have completed, along with relevant code and documentation.
+                A list of my personal projects, along with relevant code and documentation. Some of which are still being updated and worked on.
               </p>
             </div>
           </div>
@@ -70,20 +70,19 @@ export default function Projects() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Password Strength Checker</h2>
-                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Sep 2025</p>
+                  <h2 className="h3">PasswordBiotics</h2>
+                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Nov 2025</p>
                 </div>
                 <div className="tags">
                   <span className="tag">Python</span>
                   <span className="tag">HTML</span>
-                  <span className="tag">Personal Project</span>
                 </div>
               </div>
               <p className="card__body">
-                A simple, robust password strength checker coded in Python. The password is evaluated for repeated characters, sequences, common words and more.
+                PasswordBiotics is a flask-based password evaluation tool using the zxcvbn library. In addition, it incorporates blacklist detection using a list of 1000 commonly used passwords and leetspeak normalization to enhance the robustness of the tool.
               </p>
               <div className="card__actions">
-                <a className="link" href="https://github.com/kangindustries/Password-Checker">GitHub Repository →</a>
+                <a className="link" href="https://github.com/kangindustries/PasswordBiotics">GitHub Repository →</a>
               </div>
             </article>
 
@@ -91,21 +90,19 @@ export default function Projects() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Caesar Cipher Encoder/Decoder</h2>
-                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Dec 2025</p>
+                  <h2 className="h3">Identifile</h2>
+                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Jan 2026</p>
                 </div>
                 <div className="tags">
+                  <span className="tag">Python</span>
                   <span className="tag">HTML</span>
-                  <span className="tag">JS</span>
-                  <span className="tag">Personal Project</span>
                 </div>
               </div>
               <p className="card__body">
-                A tool to encode and decode text using a Caesar Cipher (Shift 0-25). A Caesar Cipher is a simple way of encrypting messages
-                by replacing a letter with a different one down a few places in the alphabet. 
+                Identifile is a file-type identification tool that uses a file's "magic number", also known as a signature, to identify its real format, regardless of the file extension or name.
               </p>
               <div className="card__actions">
-                <a className="link" href="https://github.com/kangindustries/Caesar-Cipher-Encoder-Decoder">Github Repository →</a>
+                <a className="link" href="https://github.com/kangindustries/Identifile">Github Repository →</a>
               </div>
             </article>
 
@@ -113,8 +110,8 @@ export default function Projects() {
               <div className="card-border"></div>
               <div className="card__top">
                 <div>
-                  <h2 className="h3">Coming Soon...</h2>
-                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Nov 2025 · DFIR</p>
+                  <h2 className="h3">Serpent</h2>
+                  <p className="muted" style={{ fontSize: '12px', marginTop: '4px', fontFamily: 'var(--mono)' }}>Feb 2026</p>
                 </div>
                 <div className="tags">
                   <span className="tag">Test</span>
@@ -123,10 +120,11 @@ export default function Projects() {
                 </div>
               </div>
               <p className="card__body">
-                Coming Soon...
+                Serpent is a malware scanner that uses YARA rules originally developed by VirusTotal to detect the presence of malicious software.
+                YARA rules are considered gold standard in detecting patterns commonly found in malicious software.
               </p>
               <div className="card__actions">
-                <a className="link" href="#">View Writeups →</a>
+                <a className="link" href="https://github.com/kangindustries/Serpent">GitHub Repository →</a>
               </div>
             </article>
 
