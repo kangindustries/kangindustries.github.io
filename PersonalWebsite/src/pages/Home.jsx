@@ -9,42 +9,6 @@ import { useScrollObserver } from '../hooks/useScrollObserver.js'
 import knimeCert from '../assets/knimecert.png'
 import udemyCert from '../assets/udemycert.png'
 
-/* ── Typewriter ── */
-function useTypewriter(phrases) {
-  const [displayed, setDisplayed] = useState('')
-  const [phraseIdx, setPhraseIdx] = useState(0)
-  const [charIdx, setCharIdx] = useState(0)
-  const [deleting, setDeleting] = useState(false)
-  const [paused, setPaused] = useState(false)
-
-  useEffect(() => {
-    if (paused) return
-    const target = phrases[phraseIdx]
-    const timeout = setTimeout(() => {
-      if (!deleting) {
-        if (charIdx < target.length) {
-          setDisplayed(target.slice(0, charIdx + 1))
-          setCharIdx(c => c + 1)
-        } else {
-          setPaused(true)
-          setTimeout(() => { setDeleting(true); setPaused(false) }, 2200)
-        }
-      } else {
-        if (charIdx > 0) {
-          setDisplayed(target.slice(0, charIdx - 1))
-          setCharIdx(c => c - 1)
-        } else {
-          setDeleting(false)
-          setPhraseIdx(i => (i + 1) % phrases.length)
-        }
-      }
-    }, deleting ? 38 + Math.random() * 28 : 62 + Math.random() * 60)
-    return () => clearTimeout(timeout)
-  }, [charIdx, deleting, paused, phraseIdx, phrases])
-
-  return displayed
-}
-
 /* ── Char-by-char title ── */
 function SplitTitle({ children }) {
   const titleRef = useRef(null)
@@ -178,49 +142,173 @@ function RadarBlips() {
   )
 }
 
-const TYPEWRITER_PHRASES = [
-  'Zero Trust Architecture',
-  'Confidentiality, Integrity and Availability',
-  'Virtual Private Networks',
-  'Encryption and Decryption',
-  'Authentication and Authorization',
-]
-
 const tools = [
   "Kali Linux", "Windows", "Autopsy", "FTK", "MITRE ATT&CK Framework and Navigator", "Cisco Packet Tracer",
   "Wireshark", "Wazuh", "Burp Suite", "OWASP ZAP", "Metasploit", "Nmap", "Canva", "Figma", "VS Code", "GitHub", "Python", "HTML", "CSS", "SQL"
 ]
 
+const TOOL_FILES = [
+  { name: 'wireshark',        perms: '-rwxr-xr-x', size: '14.2M', category: 'monitoring' },
+  { name: 'wazuh',            perms: '-rwxr-xr-x', size: '88.1M', category: 'monitoring' },
+  { name: 'snort',            perms: '-rwxr-xr-x', size: '6.7M',  category: 'monitoring' },
+  { name: 'autopsy',          perms: '-rwxr-xr-x', size: '210M',  category: 'forensics'  },
+  { name: 'ftk',              perms: '-rwxr-xr-x', size: '180M',  category: 'forensics'  },
+  { name: 'metasploit',       perms: '-rwxr-xr-x', size: '250M',  category: 'pentest'    },
+  { name: 'burpsuite',        perms: '-rwxr-xr-x', size: '112M',  category: 'pentest'    },
+  { name: 'owasp-zap',        perms: '-rwxr-xr-x', size: '95.4M', category: 'pentest'    },
+  { name: 'nmap',             perms: '-rwxr-xr-x', size: '4.8M',  category: 'pentest'    },
+  { name: 'packet-tracer',    perms: '-rwxr-xr-x', size: '1.1G',  category: 'networking' },
+  { name: 'gns3',             perms: '-rwxr-xr-x', size: '320M',  category: 'networking' },
+  { name: 'python',           perms: '-rwxr-xr-x', size: '9.2M',  category: 'dev'        },
+  { name: 'html',             perms: '-rwxr-xr-x', size: '9.2M',  category: 'dev'        },
+  { name: 'css',              perms: '-rwxr-xr-x', size: '9.2M',  category: 'dev'        },
+  { name: 'vscode',           perms: '-rwxr-xr-x', size: '340M',  category: 'dev'        },
+  { name: 'github',           perms: '-rwxr-xr-x', size: '18.3M', category: 'dev'        },
+  { name: 'canva',            perms: '-rw-r--r--', size: '300M',    category: 'design'     },
+  { name: 'figma',            perms: '-rw-r--r--', size: '280M',    category: 'design'     },
+  { name: 'kali-linux',       perms: 'drwxr-xr-x', size: '—',     category: 'os'         },
+  { name: 'windows',          perms: 'drwxr-xr-x', size: '—',     category: 'os'         },
+]
+
+const CAT_COLORS = {
+  monitoring: '#60a5fa',
+  forensics:  '#a78bfa',
+  pentest:    '#f87171',
+  networking: '#34d399',
+  dev:        '#fbbf24',
+  design:     '#f472b6',
+  os:         '#94a3b8',
+}
+
+function TerminalTools() {
+  const [typed, setTyped]       = useState('')
+  const [showFiles, setShowFiles] = useState(false)
+  const [hoveredTool, setHoveredTool] = useState(null)
+  const [filter, setFilter]     = useState('all')
+  const termRef = useRef(null)
+
+  const CMD = 'ls -lah /opt/tools/'
+
+  // type the command
+  useEffect(() => {
+    let i = 0
+    const iv = setInterval(() => {
+      i++
+      setTyped(CMD.slice(0, i))
+      if (i >= CMD.length) {
+        clearInterval(iv)
+        setTimeout(() => setShowFiles(true), 400)
+      }
+    }, 55)
+    return () => clearInterval(iv)
+  }, [])
+
+  const categories = ['all', ...new Set(TOOL_FILES.map(t => t.category))]
+  const visible = filter === 'all' ? TOOL_FILES : TOOL_FILES.filter(t => t.category === filter)
+
+  return (
+    <div className="term-wrap">
+      {/* window chrome */}
+      <div className="term-titlebar">
+        <span className="term-dot term-dot--red" />
+        <span className="term-dot term-dot--yellow" />
+        <span className="term-dot term-dot--green" />
+        <span className="term-title">root@localhost: ~/opt/tools</span>
+      </div>
+
+      <div className="term-body" ref={termRef}>
+        {/* prompt line */}
+        <div className="term-line">
+          <span className="term-prompt">root@localhost</span>
+          <span className="term-prompt-sep">:</span>
+          <span className="term-path">~/opt/tools</span>
+          <span className="term-prompt-dollar">$</span>
+          <span className="term-cmd">{typed}</span>
+          {!showFiles && <span className="term-cursor" />}
+        </div>
+
+        {/* output */}
+        {showFiles && (
+          <>
+            <div className="term-line term-line--meta">
+              total {TOOL_FILES.length} tools &nbsp;·&nbsp; {categories.length - 1} categories
+            </div>
+
+            {/* category filter */}
+            <div className="term-filters">
+              {categories.map(c => (
+                <button
+                  key={c}
+                  className={`term-filter${filter === c ? ' term-filter--active' : ''}`}
+                  onClick={() => setFilter(c)}
+                  style={filter === c && c !== 'all' ? { borderColor: CAT_COLORS[c], color: CAT_COLORS[c] } : {}}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+
+            <div className="term-line term-line--header">
+              <span className="term-col term-col--perms">permissions</span>
+              <span className="term-col term-col--size">size</span>
+              <span className="term-col term-col--cat">category</span>
+              <span className="term-col term-col--name">name</span>
+            </div>
+
+            {visible.map((tool, i) => (
+              <div
+                key={tool.name}
+                className={`term-line term-file${hoveredTool === tool.name ? ' term-file--hovered' : ''}`}
+                style={{ animationDelay: `${i * 0.04}s` }}
+                onMouseEnter={() => setHoveredTool(tool.name)}
+                onMouseLeave={() => setHoveredTool(null)}
+              >
+                <span className="term-col term-col--perms term-perms">{tool.perms}</span>
+                <span className="term-col term-col--size term-size">{tool.size}</span>
+                <span
+                  className="term-col term-col--cat term-cat"
+                  style={{ color: CAT_COLORS[tool.category] }}
+                >
+                  {tool.category}
+                </span>
+                <span className="term-col term-col--name term-name"
+                  style={hoveredTool === tool.name ? { color: CAT_COLORS[tool.category] } : {}}>
+                  {tool.name}
+                </span>
+              </div>
+            ))}
+
+            <div className="term-line term-line--prompt2">
+              <span className="term-prompt">root@localhost</span>
+              <span className="term-prompt-sep">:</span>
+              <span className="term-path">~/opt/tools</span>
+              <span className="term-prompt-dollar">$</span>
+              <span className="term-cursor" />
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
-  const nameRef = useRef(null)
   const posterRef = useRef(null)
   const layer1Ref = useRef(null)
   const layer2Ref = useRef(null)
   const [lightbox, setLightbox] = useState(null)
-  const typeText = useTypewriter(TYPEWRITER_PHRASES)
 
   useScrollObserver()
 
-  // Decipher name
   useEffect(() => {
-    const el = nameRef.current
-    if (!el) return
-    const target = 'Yap Kang'
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?'
-    let iteration = 0
-    el.textContent = target
-    const t = setTimeout(() => {
-      el.textContent = ''
-      const iv = setInterval(() => {
-        el.textContent = target.split('').map((ch, idx) => {
-          if (idx < iteration) return target[idx]
-          return chars[Math.floor(Math.random() * chars.length)]
-        }).join('')
-        if (iteration >= target.length) clearInterval(iv)
-        iteration += 1 / 4
-      }, 40)
-    }, 2800)
-    return () => clearTimeout(t)
+  const el = document.querySelector(".title__accent")
+  if (!el) return
+
+  const t = setTimeout(() => {
+    el.classList.add("revealed")
+  }, 1650)
+
+  return () => clearTimeout(t)
   }, [])
 
   // Parallax
@@ -266,15 +354,8 @@ export default function Home() {
 
           <div className="container poster__inner">
             <SplitTitle>
-              Hello, I'm{' '}
-              <span ref={nameRef} className="title__accent">Yap Kang</span>
+              Hello, I'm <span className="title__accent">Yap Kang</span>
             </SplitTitle>
-
-            <p className="lead" style={{ marginBottom: '0.25rem' }}>
-              <span style={{ color: 'var(--green)', fontFamily: "'DM Mono',monospace", fontSize: 'clamp(13px,1.3vw,16px)', letterSpacing: '0.05em' }}>
-                {typeText}<span className="typewriter-cursor"></span>
-              </span>
-            </p>
 
             <p className="lead" style={{ animationDelay: '1.3s', marginTop: '1.2rem' }}>
               I'm a Year 2 student at Temasek Polytechnic studying Cybersecurity and Digital Forensics.
@@ -469,7 +550,7 @@ export default function Home() {
                 </summary>
                 <div className="big-content">
                   <p>
-                    <strong><u>Tools: Wireshark, Wazuh SIEM, Kali Linux OS, MITRE ATT&CK, VirusTotal</u></strong>
+                    <strong><u>Tools: Wireshark, Wazuh SIEM, Snort IDS, Kali Linux OS, MITRE ATT&CK, VirusTotal</u></strong>
                   </p>
                   <p>
                     Experienced in using Wireshark to analyse network traffic.
@@ -530,33 +611,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="tools">
-          <div className="container">
-            <div className="tools-rail" aria-label="Tools & Technologies">
-              <div className="tools-rail__head">
-                <p className="tools-rail__desc">
-                  A summary of the tools I am familiar with.
-                </p>
-              </div>
-
-              <div className="marquee" aria-hidden="true">
-                <div className="marquee__inner">
-                  <div className="marquee__group">
-                    {tools.map((t) => (
-                      <span className="tool-pill" key={t}>{t}</span>
-                    ))}
-                  </div>
-
-                  <div className="marquee__group">
-                    {tools.map((t) => (
-                      <span className="tool-pill" key={`dup-${t}`}>{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ── TOOLS ── */}
+<section className="section" id="tools">
+  <div className="container">
+    <TerminalTools />
+  </div>
+</section>
 
         {/* ── CERTIFICATIONS ── */}
         <section className="section" id="certifications">
