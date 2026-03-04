@@ -148,43 +148,42 @@ const tools = [
 ]
 
 const TOOL_FILES = [
-  { name: 'wireshark',        perms: '-rwxr-xr-x', size: '14.2M', category: 'monitoring' },
-  { name: 'wazuh',            perms: '-rwxr-xr-x', size: '88.1M', category: 'monitoring' },
-  { name: 'snort',            perms: '-rwxr-xr-x', size: '6.7M',  category: 'monitoring' },
-  { name: 'autopsy',          perms: '-rwxr-xr-x', size: '210M',  category: 'forensics'  },
-  { name: 'ftk',              perms: '-rwxr-xr-x', size: '180M',  category: 'forensics'  },
-  { name: 'metasploit',       perms: '-rwxr-xr-x', size: '250M',  category: 'pentest'    },
-  { name: 'burpsuite',        perms: '-rwxr-xr-x', size: '112M',  category: 'pentest'    },
-  { name: 'owasp-zap',        perms: '-rwxr-xr-x', size: '95.4M', category: 'pentest'    },
-  { name: 'nmap',             perms: '-rwxr-xr-x', size: '4.8M',  category: 'pentest'    },
-  { name: 'packet-tracer',    perms: '-rwxr-xr-x', size: '1.1G',  category: 'networking' },
-  { name: 'gns3',             perms: '-rwxr-xr-x', size: '320M',  category: 'networking' },
-  { name: 'python',           perms: '-rwxr-xr-x', size: '9.2M',  category: 'dev'        },
-  { name: 'html',             perms: '-rwxr-xr-x', size: '9.2M',  category: 'dev'        },
-  { name: 'css',              perms: '-rwxr-xr-x', size: '9.2M',  category: 'dev'        },
-  { name: 'vscode',           perms: '-rwxr-xr-x', size: '340M',  category: 'dev'        },
-  { name: 'github',           perms: '-rwxr-xr-x', size: '18.3M', category: 'dev'        },
-  { name: 'canva',            perms: '-rw-r--r--', size: '300M',    category: 'design'     },
-  { name: 'figma',            perms: '-rw-r--r--', size: '280M',    category: 'design'     },
-  { name: 'kali-linux',       perms: 'drwxr-xr-x', size: '—',     category: 'os'         },
-  { name: 'windows',          perms: 'drwxr-xr-x', size: '—',     category: 'os'         },
+  { name: 'wireshark', perms: '-rwxr-xr-x', size: '14.2M', category: 'monitoring' },
+  { name: 'wazuh', perms: '-rwxr-xr-x', size: '88.1M', category: 'monitoring' },
+  { name: 'snort', perms: '-rwxr-xr-x', size: '6.7M', category: 'monitoring' },
+  { name: 'autopsy', perms: '-rwxr-xr-x', size: '210M', category: 'forensics' },
+  { name: 'ftk', perms: '-rwxr-xr-x', size: '180M', category: 'forensics' },
+  { name: 'metasploit', perms: '-rwxr-xr-x', size: '250M', category: 'pentest' },
+  { name: 'burp suite', perms: '-rwxr-xr-x', size: '112M', category: 'pentest' },
+  { name: 'owasp zap', perms: '-rwxr-xr-x', size: '95.4M', category: 'pentest' },
+  { name: 'nmap', perms: '-rwxr-xr-x', size: '4.8M', category: 'pentest' },
+  { name: 'packet tracer', perms: '-rwxr-xr-x', size: '1.1G', category: 'networking' },
+  { name: 'python', perms: '-rwxr-xr-x', size: '9.2M', category: 'dev' },
+  { name: 'html', perms: '-rwxr-xr-x', size: '9.2M', category: 'dev' },
+  { name: 'css', perms: '-rwxr-xr-x', size: '9.2M', category: 'dev' },
+  { name: 'vscode', perms: '-rwxr-xr-x', size: '340M', category: 'dev' },
+  { name: 'github', perms: '-rwxr-xr-x', size: '18.3M', category: 'dev' },
+  { name: 'canva', perms: '-rw-r--r--', size: '300M', category: 'design' },
+  { name: 'figma', perms: '-rw-r--r--', size: '280M', category: 'design' },
+  { name: 'kali linux', perms: 'drwxr-xr-x', size: '—', category: 'os' },
+  { name: 'windows', perms: 'drwxr-xr-x', size: '—', category: 'os' },
 ]
 
 const CAT_COLORS = {
   monitoring: '#60a5fa',
-  forensics:  '#a78bfa',
-  pentest:    '#f87171',
+  forensics: '#a78bfa',
+  pentest: '#f87171',
   networking: '#34d399',
-  dev:        '#fbbf24',
-  design:     '#f472b6',
-  os:         '#94a3b8',
+  dev: '#fbbf24',
+  design: '#f472b6',
+  os: '#94a3b8',
 }
 
 function TerminalTools() {
-  const [typed, setTyped]       = useState('')
+  const [typed, setTyped] = useState('')
   const [showFiles, setShowFiles] = useState(false)
   const [hoveredTool, setHoveredTool] = useState(null)
-  const [filter, setFilter]     = useState('all')
+  const [filter, setFilter] = useState('all')
   const termRef = useRef(null)
 
   const CMD = 'ls -lah /opt/tools/'
@@ -301,14 +300,14 @@ export default function Home() {
   useScrollObserver()
 
   useEffect(() => {
-  const el = document.querySelector(".title__accent")
-  if (!el) return
+    const el = document.querySelector(".title__accent")
+    if (!el) return
 
-  const t = setTimeout(() => {
-    el.classList.add("revealed")
-  }, 1650)
+    const t = setTimeout(() => {
+      el.classList.add("revealed")
+    }, 1650)
 
-  return () => clearTimeout(t)
+    return () => clearTimeout(t)
   }, [])
 
   // Parallax
@@ -474,7 +473,6 @@ export default function Home() {
               <details className="big-item">
                 <summary className="big-summary">
                   <span className="big-title">Networking</span>
-                  <span className="big-meta">ROUTING // FIREWALLS // IP ADDRESSING</span>
                   <span className="big-icon" aria-hidden="true">+</span>
                 </summary>
                 <div className="big-content">
@@ -498,12 +496,11 @@ export default function Home() {
               <details className="big-item">
                 <summary className="big-summary">
                   <span className="big-title">Digital Forensics</span>
-                  <span className="big-meta">FILESYSTEM ANALYSIS // COMPUTER FORENSICS // FORENSICS PROCESSES</span>
                   <span className="big-icon" aria-hidden="true">+</span>
                 </summary>
                 <div className="big-content">
                   <p>
-                    <strong><u>Tools: Autopsy, FTK, ExifTool</u></strong>
+                    <strong><u>Tools: Autopsy, FTK</u></strong>
                   </p>
                   <p>
                     Analysed a recovered disk containing emails to create a timeline of an incident for better visualisations.
@@ -518,15 +515,14 @@ export default function Home() {
               <details className="big-item">
                 <summary className="big-summary">
                   <span className="big-title">VAPT</span>
-                  <span className="big-meta">ETHICAL HACKING // SECURING WEB APPLICATIONS</span>
                   <span className="big-icon" aria-hidden="true">+</span>
                 </summary>
                 <div className="big-content">
                   <p>
-                    <strong><u>Tools: Metasploit Framework, Kali Linux OS, Burp Suite, OWASP ZAP, Nmap</u></strong>
+                    <strong><u>Tools: Metasploit, Kali Linux OS, Burp Suite, OWASP ZAP, Nmap</u></strong>
                   </p>
                   <p>
-                    Utilised the Metasploit framework and a Kali Linux VM to document vulnerabilities and remediation strategies found in target systems.
+                    Utilised the Metasploit and a Kali Linux VM to document vulnerabilities and remediation strategies found in target systems.
                     Focused on was SQL Injection, one of the most common web vulnerabilities according to OWASP, which gave me relevant exposure to its consequences and why attackers abuse it.
                   </p>
                   <p>
@@ -545,7 +541,6 @@ export default function Home() {
               <details className="big-item">
                 <summary className="big-summary">
                   <span className="big-title">Incident Response</span>
-                  <span className="big-meta">SIEM // PACKET ANALYSIS</span>
                   <span className="big-icon" aria-hidden="true">+</span>
                 </summary>
                 <div className="big-content">
@@ -568,7 +563,6 @@ export default function Home() {
               <details className="big-item">
                 <summary className="big-summary">
                   <span className="big-title">Auditing</span>
-                  <span className="big-meta">IT AUDITING // BASH SCRIPTING // RESEARCH</span>
                   <span className="big-icon" aria-hidden="true">+</span>
                 </summary>
                 <div className="big-content">
@@ -599,9 +593,9 @@ export default function Home() {
                   <p>
                     In addition to the tools and technologies listed above, I am also familiar with:
                     <ul>
-                      <li>Canva and Figma (for Prototyping)</li>
-                      <li>Python, HTML and CSS (for Programming and Development).</li>
-                      <li>Visual Studio Code and GitHub (for Workflow)</li>
+                      <li>Canva and Figma</li>
+                      <li>Python, HTML and CSS</li>
+                      <li>Visual Studio Code and GitHub</li>
                     </ul>
                   </p>
                 </div>
@@ -612,11 +606,14 @@ export default function Home() {
         </section>
 
         {/* ── TOOLS ── */}
-<section className="section" id="tools">
-  <div className="container">
-    <TerminalTools />
-  </div>
-</section>
+        <section className="section" id="tools">
+          <div className="container">
+            <div className="section__head">
+              <h2 className="section-heading-glow">Tools & Technologies</h2>
+            </div>
+            <TerminalTools />
+          </div>
+        </section>
 
         {/* ── CERTIFICATIONS ── */}
         <section className="section" id="certifications">
