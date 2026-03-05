@@ -3,8 +3,8 @@ import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import ScrollProgress from '../components/ScrollProgress.jsx'
 import { useScrollObserver } from '../hooks/useScrollObserver.js'
-import passwordBioticsImg from '../assets/elementor-placeholder-image.png'
-import identifileImg from '../assets/elementor-placeholder-image.png'
+import passwordBioticsImg from '../assets/passwordbiotics.png'
+import identifileImg from '../assets/identifile.png'
 import serpentImg from '../assets/serpent.png'
 
 function SplitTitle({ children }) {

@@ -183,8 +183,8 @@ function TerminalTools() {
   const [typed, setTyped] = useState('')
   const [showFiles, setShowFiles] = useState(false)
   const [hoveredTool, setHoveredTool] = useState(null)
-  const [filter, setFilter] = useState('all')
   const termRef = useRef(null)
+  const categories = new Set(TOOL_FILES.map(t => t.category))
 
   const CMD = 'ls -lah /opt/tools/'
 
@@ -201,9 +201,6 @@ function TerminalTools() {
     }, 55)
     return () => clearInterval(iv)
   }, [])
-
-  const categories = ['all', ...new Set(TOOL_FILES.map(t => t.category))]
-  const visible = filter === 'all' ? TOOL_FILES : TOOL_FILES.filter(t => t.category === filter)
 
   return (
     <div className="term-wrap">
@@ -230,21 +227,7 @@ function TerminalTools() {
         {showFiles && (
           <>
             <div className="term-line term-line--meta">
-              total {TOOL_FILES.length} tools &nbsp;·&nbsp; {categories.length - 1} categories
-            </div>
-
-            {/* category filter */}
-            <div className="term-filters">
-              {categories.map(c => (
-                <button
-                  key={c}
-                  className={`term-filter${filter === c ? ' term-filter--active' : ''}`}
-                  onClick={() => setFilter(c)}
-                  style={filter === c && c !== 'all' ? { borderColor: CAT_COLORS[c], color: CAT_COLORS[c] } : {}}
-                >
-                  {c}
-                </button>
-              ))}
+              total {TOOL_FILES.length} tools &nbsp;·&nbsp; {categories.size} categories
             </div>
 
             <div className="term-line term-line--header">
@@ -254,7 +237,7 @@ function TerminalTools() {
               <span className="term-col term-col--name">name</span>
             </div>
 
-            {visible.map((tool, i) => (
+            {TOOL_FILES.map((tool, i) => (
               <div
                 key={tool.name}
                 className={`term-line term-file${hoveredTool === tool.name ? ' term-file--hovered' : ''}`}
@@ -452,7 +435,6 @@ export default function Home() {
                   I hope to further enhance my cybersecurity skills while progressing through my course and I look forward to contributing to a safer digital world.
                 </p>
 
-                <p className="about-signoff">— Yap Kang</p>
               </div>
             </div>
           </div>
@@ -641,24 +623,47 @@ export default function Home() {
         </section>
 
         {/* ── CONTACT ── */}
-        <section className="section" id="contact">
-          <div className="container split">
-            <div>
-              <div className="section__head">
-                <h2 className="section-heading-glow">Get in Touch</h2>
-              </div>
-              <p className="lead lead--sm">
-                You can find my socials and reach out to me using the links below.
-                I'm open to collaborations and discussions, and respond to any emails as quickly as I can.
-              </p>
-              <div className="stack">
-                <a className="stackbtn" href="https://www.linkedin.com/in/yap-kang-b84755304/" target="_blank" rel="noopener noreferrer"><span>LinkedIn — Connect with me</span></a>
-                <a className="stackbtn" href="mailto:yap.kang@gmail.com"><span>Email — Reach out directly</span></a>
-                <a className="stackbtn" href="https://github.com/kangindustries"><span>GitHub — Let's collaborate</span></a>
-              </div>
-            </div>
-          </div>
-        </section>
+<section className="section" id="contact">
+  <div className="container">
+    <div className="section__head">
+      <h2 className="section-heading-glow">Get in Touch</h2>
+    </div>
+    <p className="lead lead--sm" style={{ opacity: 1, transform: 'none', marginBottom: '3rem' }}>
+      You can find my socials and reach out to me using the links below.
+      I'm open to collaborations and discussions, and respond to any emails as quickly as I can.
+    </p>
+    <div className="orb-contact">
+      <a className="orb-contact__item" href="https://www.linkedin.com/in/yap-kang-b84755304/" target="_blank" rel="noopener noreferrer" style={{'--orb-color': '#60a5fa', '--orb-glow': 'rgba(96,165,250,0.2)'}}>
+        <div className="orb-contact__circle">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
+          </svg>
+        </div>
+        <span className="orb-contact__name">LinkedIn</span>
+        <span className="orb-contact__label">Connect with me</span>
+      </a>
+
+      <a className="orb-contact__item" href="mailto:yap.kang@gmail.com" style={{'--orb-color': '#34d399', '--orb-glow': 'rgba(52,211,153,0.2)'}}>
+        <div className="orb-contact__circle">
+          <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>mail</span>
+        </div>
+        <span className="orb-contact__name">Email</span>
+        <span className="orb-contact__label">Reach out directly</span>
+      </a>
+
+      <a className="orb-contact__item" href="https://github.com/kangindustries" target="_blank" rel="noopener noreferrer" style={{'--orb-color': '#a78bfa', '--orb-glow': 'rgba(167,139,250,0.2)'}}>
+        <div className="orb-contact__circle">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
+        </div>
+        <span className="orb-contact__name">GitHub</span>
+        <span className="orb-contact__label">Let's collaborate</span>
+      </a>
+    </div>
+  </div>
+</section>
 
       </main>
       <Footer />
