@@ -51,7 +51,6 @@ const PROJECTS = [
     id: 'PasswordBiotics',
     number: '001',
     name: 'PasswordBiotics',
-    status: 'COMPLETED',
     tags: ['Python', 'HTML'],
     description: 'PasswordBiotics is a flask-based password evaluation tool using the zxcvbn library. It incorporates blacklist detection using a list of 1000 commonly used passwords and leetspeak normalization to enhance the robustness of the tool.',
     link: 'https://github.com/kangindustries/PasswordBiotics',
@@ -65,7 +64,6 @@ const PROJECTS = [
     id: 'Identifile',
     number: '002',
     name: 'Identifile',
-    status: 'COMPLETED',
     tags: ['Python', 'HTML'],
     description: 'Identifile is a file-type identification tool that uses a file\'s "magic number", also known as a signature, to identify its real format regardless of the file extension or name.',
     link: 'https://github.com/kangindustries/Identifile',
@@ -79,7 +77,6 @@ const PROJECTS = [
     id: 'Serpent',
     number: '003',
     name: 'Serpent',
-    status: 'ACTIVE',
     tags: ['Python', 'YARA'],
     description: 'Serpent is a malware scanner that uses YARA rules originally developed by VirusTotal to detect the presence of malicious software. YARA rules are considered gold standard in detecting patterns commonly found in malicious software.',
     link: 'https://github.com/kangindustries/Serpent',
@@ -125,15 +122,6 @@ export default function Projects() {
                 <div className="proj-row__info">
                   <div className="proj-row__number-bg">{p.number}</div>
                   <div className="proj-row__meta">
-                    <span
-                      className="proj-row__status"
-                      style={{
-                        color: p.status === 'ACTIVE' ? '#34d399' : p.accentText,
-                        borderColor: p.status === 'ACTIVE' ? 'rgba(52,211,153,0.3)' : p.accentBorder
-                      }}
-                    >
-                      {p.status === 'ACTIVE' ? '● ' : '○ '}{p.status}
-                    </span>
                   </div>
 
                   <h2 className="proj-row__name">{p.name}</h2>
